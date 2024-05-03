@@ -1,109 +1,110 @@
-import socket
-import struct
+#!/usr/bin/env python3
+import socket #biblioteca para criar socket UDP
+import struct #biblioteca para criar pacotes UDP
 import random
+import sys
 
-def create_ns_query(domain):
-    # Header: [Transaction ID, Flags, QDCOUNT, ANCOUNT, NSCOUNT, ARCOUNT]
-    # Transaction ID is arbitrary but should be random for security reasons
-    # Flags set to 0x0100 for standard query
-    # QDCOUNT (number of questions) = 1
-    query = struct.pack(">HHHHHH", random.getrandbits(16), 0x0100, 0x0001, 0x0000, 0x0000, 0x0000)
-    # Encode the domain name to DNS labels format
-    labels = domain.split(".")
-    for label in labels:
-        query += struct.pack("B", len(label)) + label.encode()
-    query += struct.pack("B", 0)  # End of domain name label
-    # QTYPE=2 for NS records, QCLASS=1 for IN (Internet)
-    query += struct.pack(">HH", 2, 1)
-    return query
+def cria_pacote(hostname):
+    # Cabecalho: [Transaction ID, Flags, QDCOUNT, ANCOUNT, NSCOUNT, ARCOUNT]
+    # Transaction ID eh um numero aleatorio
+    # Flag 0x0100 para busca DNS padrao
+    # QDCOUNT = 1
+    busca = struct.pack(">HHHHHH", random.getrandbits(16), 0x0100, 0x0001, 0x0000, 0x0000, 0x0000)
 
-def send_dns_query(query, dns_server):
-    # Create a UDP socket
+    # Colocando o dominio no padrao de busca DNS
+    dominios = hostname.split(".")
+    for dominio in dominios:
+        busca += struct.pack("B", len(dominio)) + dominio.encode()
+    busca += struct.pack("B", 0x0000)  # Fim do hostname
+
+    # QTYPE=2 para consulta NS, QCLASS=1 para IN (Internet)
+    busca += struct.pack(">HH", 0x0002, 0x0001)
+    return busca
+
+def envia_e_recebe(busca, dns_server):
     for i in range(3):
         with socket.socket(socket.AF_INET, socket.SOCK_DGRAM) as sock:
-            sock.settimeout(2)  # Set a timeout of 2 seconds
-            sock.sendto(query, (dns_server, 53))  # DNS uses port 53
+            sock.settimeout(2)  # timeout = 2s
+            sock.sendto(busca, (dns_server, 53))  #envia busca DNS para o servidor na porta 53 
             try:
-                data, _ = sock.recvfrom(512)  # DNS response size limit is 512 bytes
-                return data
+                resposta, _ = sock.recvfrom(512)  # receber resposta do servidor DNS (tamanho maximo de 512 bytes)
+                return resposta
             except socket.timeout:
                 continue
 
-    return None
+    return None #caso nao haja resposta, retorna vazio para o parser
 
-def parse_dns_response(response):
-    if response is None:
-        print("No response received.")
+def parse_resposta(resposta, hostname):
+    if resposta is None:
+        print("Ficou no vacuo")
         return
 
     # Parsing the response header
-    header = struct.unpack(">HHHHHH", response[:12])
-    print("Transaction ID:", header[0])
-    print("Flags:", header[1])
-    print("Questions:", header[2])
-    print("Answers:", header[3])
-    print("Authority RRs:", header[4])
-    print("Additional RRs:", header[5])
+    cabecalho = struct.unpack(">HHHHHH", resposta[:12])
+    #print("Transaction ID:", cabecalho[0])
+    print("Flags:", cabecalho[1])
+    #print("Questions:", cabecalho[2])
+    #print("Answers:", cabecalho[3])
+    #print("Authority RRs:", cabecalho[4])
+    #print("Additional RRs:", cabecalho[5])
     
     offset = 12  # Initial offset after the header
     # Skip over the question section
-    while response[offset] != 0:
+    while resposta[offset] != 0:
         offset += 1  # Skip the domain name
     offset += 5  # Skip the null byte + Type (2 bytes) + Class (2 bytes)
 
     # Process each answer
-    for _ in range(header[3]):  # header[3] is the ANCOUNT
+    for _ in range(cabecalho[3]):  # header[3] is the ANCOUNT
         # Check for a pointer (common in responses)
-        if response[offset] >= 192:  # 192 = 0xC0, the start of a pointer
+        if resposta[offset] >= 192:  # 192 = 0xC0, the start of a pointer
             offset += 2  # Skip the pointer
         else:
-            while response[offset] != 0:
+            while resposta[offset] != 0:
                 offset += 1  # Skip the domain name
             offset += 1  # Skip the null byte
 
-        type, cls, ttl, rdlength = struct.unpack(">HHIH", response[offset:offset + 10])
+        type, cls, ttl, rdlength = struct.unpack(">HHIH", resposta[offset:offset + 10])
         offset += 10
-        print("\nAnswer:")
-        print("Type:", type, "Class:", cls, "TTL:", ttl, "Data length:", rdlength)
-
         if type == 2:  # Type 2 is NS
-            name = []
-            name_server = parse_name(response, offset, name)
-            print("Name Server:", name_server)
+            nome = []
+            name_server = parse_domain(resposta, offset, nome)
+            print(hostname, "<>", name_server)
 
 
         # For type A (IPv4 address), read and print the IP address
-        if type == 1 and cls == 1:  # Type 1 is A, Class 1 is IN
-            ip_addr = socket.inet_ntoa(response[offset:offset + rdlength])
-            print("IP Address:", ip_addr)
+        #if type == 1 and cls == 1:  # Type 1 is A, Class 1 is IN
+        #   ip_addr = socket.inet_ntoa(response[offset:offset + rdlength])
+        #    print("IP Address:", ip_addr)
 
         offset += rdlength
 
 
-def parse_name(response, offset, name):
+def parse_domain(resposta, offset, nome):
     # This function needs to handle pointers properly to parse domain names
     while True:
-        length = response[offset]
-        if length == 0:
+        tam = resposta[offset]
+        if tam == 0:
             offset += 1
             break
-        elif length >= 192:  # This is a pointer
-            pointer = struct.unpack(">H", response[offset:offset+2])[0]
+        elif tam >= 192:  # This is a pointer
+            pointer = struct.unpack(">H", resposta[offset:offset+2])[0]
             offset += 2
             # Dereference pointer (note: pointer offset is from the start of the packet, adjust if needed)
-            return parse_name(response, pointer & 0x3FFF, name)
+            return parse_domain(resposta, pointer & 0x3FFF, nome)
         else:
             offset += 1
-            name.append(response[offset:offset+length].decode())
-            offset += length
-    return '.'.join(name)
+            nome.append(resposta[offset:offset+tam].decode())
+            offset += tam
+    return '.'.join(nome)
 
-hostname = input()
-dns_server = input()
+args = sys.argv[1:]
 
-query = create_ns_query(hostname)
-print(query)
+hostname = args[0]
+dns_server = args[1]
 
-response = send_dns_query(query, dns_server)
-parse_dns_response(response)
+query = cria_pacote(hostname)
+
+resposta = envia_e_recebe(query, dns_server)
+parse_resposta(resposta, hostname)
 
