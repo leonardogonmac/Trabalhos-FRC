@@ -1,4 +1,12 @@
 #!/usr/bin/env python3
+
+#Trabalho 01 - FRC
+#Integrantes:
+#       Heitor Marques Simões Barbosa - 202016462
+#       Jose Luis Ramos Teixeira      - 190057858
+#       Leonardo Goncalves Machado    - 211029405
+#       Zenilda Pedrosa Vieira        - 212002907
+
 import socket #biblioteca para criar socket UDP
 import struct #biblioteca para criar pacotes UDP
 import random
@@ -117,7 +125,7 @@ dns_server = args[1]
 
 
 pacote = cria_pacote(dominio)
-
+print(pacote)
 resposta = envia_e_recebe(pacote, dns_server)
 parse_resposta(resposta, dominio)
 
