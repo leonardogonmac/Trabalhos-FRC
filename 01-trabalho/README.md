@@ -66,7 +66,7 @@ pacote = cria_pacote(dominio)
 resposta = envia_e_recebe(pacote, dns_server) 
 parse_resposta(resposta, dominio)
 ```
-No trexo acima ele chama a função para criação o pacote DNS para a consulta do domínio especificado, com o pacote criado envia o pacote DNS para o servidor DNS e aguarda a resposta, por fim analisa a resposta recebida do servidor DNS e exibe o resultado da consulta.
+No trecho acima ele chama a função para criação o pacote DNS para a consulta do domínio especificado, com o pacote criado envia o pacote DNS para o servidor DNS e aguarda a resposta, por fim analisa a resposta recebida do servidor DNS e exibe o resultado da consulta.
 
 ## Executando o Código
 Para executar o codigo deverá executar o arquivo python passando 2 argumentos, o nome do domínio e o ip do servidor DNS
