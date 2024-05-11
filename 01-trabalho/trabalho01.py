@@ -125,7 +125,7 @@ dns_server = args[1]
 
 
 pacote = cria_pacote(dominio)
-print(pacote)
+#print(pacote)
 resposta = envia_e_recebe(pacote, dns_server)
 parse_resposta(resposta, dominio)
 
