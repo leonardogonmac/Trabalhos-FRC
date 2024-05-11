@@ -53,7 +53,7 @@ Para o ambiente de desenvolvimento foi utilizado python 3.11.5
 <a name="top4"></a>
 
 ## 4. Como o Código foi construído
-O código foi construído em Python e utiliza bibliotecas padrão para comunicação via socket UDP e manipulação de estruturas de dados binárias. Ele é dividido em três principais funções:
+O código foi construído em Python e utiliza bibliotecas padrão para comunicação via socket UDP e manipulação de estruturas de dados binárias. Ele é dividido em quatro principais funções:
 
 1.  ```bash
     def cria_pacote(nome):
@@ -192,7 +192,7 @@ $ python3 .\trabalho01.py <dominio> <dns_server>
 
     ![Exemplo 3](./imgs/exemplo3.png)
 
-- `Exemplo 3-2`
+- `Exemplo 3.2`
     ```bash
     $ python3 .\trabalho01.py sti.unb.br 8.8.8.8
     ```
@@ -214,14 +214,14 @@ $ python3 .\trabalho01.py <dominio> <dns_server>
 
     ![Exemplo 4](./imgs/exemplo4.png)
 
-- `Exemplo 4-2`
+- `Exemplo 4.2`
     ```bash
     $ python3 .\trabalho01.py amazon.com 4.3.2.1
     ```
 
     ![Exemplo 4-2](./imgs/exemplo4-2.png)
 
-- `Exemplo 4-3`
+- `Exemplo 4.3`
     ```bash
     $ python3 .\trabalho01.py github.com 1.0.1.0
     ```
