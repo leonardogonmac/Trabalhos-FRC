@@ -89,7 +89,7 @@ Esse trabalho tem como principal objetivo exercitar conceitos de configuração 
 
 ??????? EXPLICAR AS FERRAMENTAS UTILIZADAS COM BREVES DEFINIÇÕES
 
-`ifconfig`
+`ifconfig` -> ip addr show
 `ip`
 `iptables`
 `systemctl`
@@ -118,7 +118,7 @@ COLOCAR DESENHO DA REDE MONTADA ???????
 
 - Antes de tudo, desativamos os serviços de suporte às configurações de rede com o seguinte comando para realizar a configuração manual das placas de rede, também chamada de configuração estática.
 ```bash
-sudo service network-manager stop
+sudo service NetworkManager stop
 ```
 
 - E verificamos como estão os IPs das duas placas de rede instaladas no computador usando o comando:
@@ -142,10 +142,10 @@ Iniciamos configurando um roteador em que a interface de rede WAN assumisse um I
 sudo nano /etc/network/interfaces
 ```
 
-- Adicionamos (ou modificamos ????) a configuração da interface WAN para colocar essa interface configurável de forma estática, assumindo `eth0`:
+- Adicionamos (ou modificamos ????) a configuração da interface WAN para colocar essa interface configurável de forma estática, assumindo `eno1`:
 ```plaintext
-auto eth0
-iface eth0 inet static
+auto eno1
+iface eno1 inet static
     address 192.168.133.2
     netmask 255.255.255.0
     gateway 192.168.133.1
@@ -154,7 +154,7 @@ iface eth0 inet static
 #### 6.1.2. Reinicialização da Interface
 - Reiniciamos a interface com o seguinte comando
 ```bash
-sudo ifdown eth0 && sudo ifup eth0
+sudo ifdown eno1 && sudo ifup eno1
 ```
 
 #### 6.1.3. Verificação do endereço configurado
@@ -180,10 +180,10 @@ Em seguida, continuamos a configuração considerando que a rede LAN provida atr
 sudo nano /etc/network/interfaces
 ```
 
-- Adicionamos a configuração da interface LAN para colocar essa interface configurável de forma estática, assumindo `eth1`:
+- Adicionamos a configuração da interface LAN para colocar essa interface configurável de forma estática, assumindo `enp5s0`:
 ```plaintext
-auto eth1
-iface eth1 inet static
+auto enp5s0
+iface enp5s0 inet static
     address 10.1.0.1
     netmask 255.255.0.0
 ```
@@ -191,7 +191,7 @@ iface eth1 inet static
 #### 6.2.2. Reinicialização da Interface
 - Reiniciamos a interface com o seguinte comando:
 ```bash
-sudo ifdown eth1 && sudo ifup eth1
+sudo ifdown enp5s0 && sudo ifup enp5s0
 ```
 
 #### 6.2.3. Verificação do endereço configurado
@@ -228,15 +228,15 @@ sudo sysctl -p
 ```
 
 #### 6.3.2. Configuração do iptables para NAT
-- Após a configuração da interface de saída WAN (eth0) e a configuração da interface interna LAN (eth1) sem DHCP, realizamos a limpeza de eventuais regras de _firewall_ presentes no equipamento:
+- Após a configuração da interface de saída WAN (eno1) e a configuração da interface interna LAN (enp5s0) sem DHCP, realizamos a limpeza de eventuais regras de _firewall_ presentes no equipamento:
 ```bash
 sudo iptables --flush
 sudo iptables --table nat --flush
 sudo iptables --delete-chain
 sudo iptables --table nat --delete-chain
-sudo iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE
-sudo iptables -A FORWARD -i eth1 -o eth0 -j ACCEPT
-sudo iptables -A FORWARD -i eth0 -o eth1 -m state --state RELATED,ESTABLISHED -j ACCEPT
+sudo iptables -t nat -A POSTROUTING -o eno1 -j MASQUERADE
+sudo iptables -A FORWARD -i enp5s0 -o eno1 -j ACCEPT
+sudo iptables -A FORWARD -i eno1 -o enp5s0 -m state --state RELATED,ESTABLISHED -j ACCEPT
 ```
 NO EXPERIMENTO DO TCC NAO TEM A ULTIMA LINHA. PRECISA?????
 
@@ -249,6 +249,10 @@ sudo netfilter-persistent reload
 ```
 6.3.3 NAO TEM NO EXPERIMENTO DO TCC. PRECISA FAZER????????
 
+
+```bash
+sudo iptables -L -v -n
+```
 <a name="top6.4"></a>
 
 ### 6.4. Configuração do Serviço DHCP
@@ -339,9 +343,9 @@ host test-machine {
 sudo nano /etc/default/isc-dhcp-server
 ```
 
-- Adicionamos (ou modificamos ?????) a linha a seguir para sempre disparar o serviço somente na interface eth1:
+- Adicionamos (ou modificamos ?????) a linha a seguir para sempre disparar o serviço somente na interface enp5s0:
 ```plaintext
-INTERFACESv4="eth1"   
+INTERFACESv4="enp5s0"   
 ```
 
 
@@ -438,7 +442,7 @@ ping 192.168.133.1    ALTERAR IP PARA UM COMPUTADOR FORA DA REDE
 
 - Em uma máquina cliente da rede LAN, obtenha um endereço IP e teste a conectividade:
 ```bash
-dhclient eth0
+dhclient eno1
 ping 10.0.0.1
 ```
 
