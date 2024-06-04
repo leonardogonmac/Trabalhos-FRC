@@ -1,0 +1,431 @@
+ifconfig 
+ifconfig
+if config
+ifconfig -a
+sudo apt update
+sudo apt install ifconfig
+sudo apt install net-tools
+ifconfig
+net-tools
+ifconfig
+ip addr
+ip addr show
+shutdown
+reboot
+sudo reboot
+ip addr show
+sudo shutdown
+id addr
+id addrs
+ip addr
+ip addr show
+sudo nano /etc/network/interfaces
+sudo ifdown wlxd037454d4eba && ifup wlxd037454d4eba
+sudo ifdown wlxd037454d4eba && sudo ifup wlxd037454d4eba
+sudo nano /etc/network/interfaces
+sudo ifdown wlxd037454d4eba && sudo ifup wlxd037454d4eba
+ip addr show
+sudo ifdown wlxd037454d4eba && sudo ifup wlxd037454d4eba
+sudo nano /etc/network/interfaces
+sudo ifdown wlxd037454d4eba
+sudo nano /etc/network/interfaces
+sudo ifdown epn5s0 && ifup epn5s0
+sudo ifdown epn5s0 && sudo ifup epn5s0
+sudo ifup epn5s0
+sudo nano /etc/network/interfaces
+sudo ifdown wlxd037454d4eba && sudo ifup wlxd037454d4eba
+sudo ifdown wlxd037454d4eba
+sudo nano /etc/network/interfaces
+sudo ifdown wlxd037454d4eba && sudo ifup wlxd037454d4eba
+sudo ifdown wlan0 && sudo ifup wlan0
+ip addr
+sudo nano /etc/network/interfaces
+sudo ifdown wlan0 && sudo ifup wlan0
+ip addr
+sudo nano /etc/network/interfaces
+sudo ifdown wlan0 && sudo ifup wlan0
+sudo ifdown wlxd037454d4eba && sudo ifup wlxd037454d4eba
+ip addr
+sudo nano /etc/network/interfaces
+sudo ifdown wlxd037454d4eba && sudo ifup wlxd037454d4eba
+sudo nano /etc/network/interfaces
+ip addr
+sudo nano /etc/network/interfaces
+sudo ifdown wlxd037454d4eba
+sudo ifup wlxd037454d4eba
+sudo nano /etc/network/interfaces
+ip addr
+sudo nano /etc/network/interfaces
+ifconfig
+sudo ifconfig
+sudo su -
+sudo nano /etc/network/interfaces
+sudo ifdown wlan0
+sudo ifup wlan0
+ip addr
+sudo nano /etc/network/interfaces
+sudo ifdown wlan0
+sudo ifdown wlxd037454d4eba
+sudo ifup wlxd037454d4eba
+sudo ifup wlan
+sudo ifup wlan0
+sudo nano /etc/network/interfaces
+sudo ifdown wlxd037454d4eba
+sudo ifup wlxd037454d4eba
+ip addr
+sudo nano /etc/network/interfaces
+ip addr
+sudo nano /etc/network/interfaces
+sudo lspci -v
+sudo lspci -v | grep 'Ethernet'
+sudo ifdown wlxd037454d4eba
+sudo ifup wlxd037454d4eba
+sudo lshw -class network
+ip addr
+sudo nano /etc/network/interfaces
+ip addr
+sudo ifdown wlxd037454d4eba
+sudo ifup wlxd037454d4eba
+ip addr
+sudo ifup wlxd037454d4eba
+sudo ifdown wlxd037454d4eba
+sudo nano /etc/network/interfaces
+sudo ifdown wlan0
+sudo ifup wlan0
+ip addr
+sudo service NetworkManager status
+sudo service NetworkManager stop
+sudo service NetworkManager status
+ip addr
+sudo ip addr
+ip addr
+sudo ip addr
+ip addr
+sudo ifcondig
+sudo ifconfig
+ip addr
+sudo ifconfig
+ip addr
+sudo ifconfig
+ip addr
+id addr
+ip addr
+sudo service NetworkManager stop
+sudo service NetworkManager status
+sudo ifconfig -a
+sudo nano /etc/network/interfaces
+sudo ifdown eno1 && sudo ifup eno1
+sudo ifconfig -a
+sudo ifdown enp5s0 && sudo ifup enp5s0
+sudo nano /etc/sysctl.conf
+sudo sysctl -p
+sudo iptables --flush
+sudo iptables --table nat --flush
+sudo iptables --delete-chain
+sudo iptables --table nat --delete-chain
+sudo iptables -t nat -A POSTROUTING -o eno1 -j MASQUERADE
+sudo iptables -A FORWARD -i enp5s0 -o eno1 -j ACCEPT
+sudo iptables -A FORWARD -i eno1 -o enp5s0 -m state --state RELATED,ESTABLISHED -j ACCEPT
+sudo iptables -L -v -n
+sudo nano /etc/dhcp/dhcpd.conf
+sudo dhcpd -t
+sudo nano /etc/default/isc-dhcp-server
+/etc/init.d/isc-dhcp-server start
+dhcpd -d -f eno1
+sudo nano /etc/default/isc-dhcp-server
+grep dhcpd /var/log/sysslog
+grep dhcpd /var/log/syslog
+sudo grep dhcpd /var/log/syslog
+cat /var/lib/dhcp/dhcpd.leases
+arp -a
+sudo arp -a
+ping 10.1.0.50
+if config
+ip addr
+ping 8.8.8.8
+ping 8.8.4.4
+ping github.com
+sudo nano /etc/sysctl.conf
+nautilus .
+sudo nano /etc/sysctl.conf
+cd /etc/dhcp/
+nautilus .
+sudo nano /etc/dhcp/dhcpd.conf
+sudo nano /etc/default/isc-dhcp-server
+cd /etc/default/i
+cd /etc/default/
+ip addr
+nautilus .
+cd ~
+ls
+ping amazon.com
+telnet
+telnet 192.168.133.92 -p 12345
+telnet 192.168.133.92 12345
+arp -a
+arp
+ls
+arp -a
+sudo arp -a
+sudo vim /etc/network/interfaces
+sudo ifconfig
+ip a
+sudo ifconfig
+sudo ifconfig -a
+sudo ifconfig 
+clear
+sudo service NetworkManager status
+sudo service NetworkManager stop
+sudo service NetworkManager status
+sudo ifconfig 
+sudo ifconfig
+ip addr
+sudo ifconfig
+clear
+ip addr
+sudo service NetworkManager status
+sudo service NetworkManager stop
+sudo service NetworkManager status
+sudo ifconfig
+sudo iptables -L -v -n
+sudo ifconfig
+sudo ifdown enp5s0 && sudo ifup enp5s0
+sudo ifconfig
+ip addr show
+sudo sysctl -p
+sudo iptables --flush
+sudo iptables --table nat --flush
+sudo iptables --delete-chain
+sudo iptables --table nat --delete-chain
+sudo iptables -t nat -A POSTROUTING -o eno1 -j MASQUERADE
+sudo iptables -A FORWARD -i enp5s0 -o eno1 -j ACCEPT
+sudo iptables -A FORWARD -i eno1 -o enp5s0 -m state --state RELATED,ESTABLISHED -j ACCEPT
+sudo dhcpd -t
+sudo systemctl start isc-dhcp-server
+sudo systemctl restart isc-dhcp-server
+sudo nano /etc/dhcp/dhcpd.conf
+sudo dhcpd -t
+sudo nano /etc/default/isc-dhcp-server
+sudo service NetworkManager status
+cat /var/lib/dhcp/dhcpd.leases
+grep dhcpd /var/log/syslog
+sudo ifdown enp5s0 && sudo ifup enp5s0
+sudo ifdown eno1 && sudo ifup en01
+sudo ifdown eno1 && sudo ifup eno1
+sudo nano /etc/network/interfaces
+sudo ifdown enp5s0 && sudo ifup enp5s0
+sudo ifdown eno1 && sudo ifup eno1
+sudo ifconfig 
+ip addr show 
+sudo iptables --flush
+sudo iptables --table nat --flush
+sudo iptables --delete-chain
+sudo iptables --table nat --delete-chain
+sudo iptables -t nat -A POSTROUTING -o eno1 -j MASQUERADE
+sudo iptables -A FORWARD -i enp5s0 -o eno1 -j ACCEPT
+sudo iptables -A FORWARD -i eno1 -o enp5s0 -m state --state RELATED,ESTABLISHED -j ACCEPT
+sudo iptables -L -v -n
+sudo dhcpd -t
+sudo systemctl restart isc-dhcp-server
+journalctl -xeu isc-dhcp-server.service
+sudo journalctl -xeu isc-dhcp-server.service
+sudo nano /etc/dhcp/dhcpd.conf
+clear
+sudo service NetworkManager status
+sudo ifdown eno1 && sudo ifup eno1
+sudo systemctl stop isc-dhcp-server
+sudo ifdown eno1 && sudo ifup eno1
+sudo ifconfig -a
+sudo ifdown enp5s0 && sudo ifup enp5s0
+sudo ifconfig -a
+sudo sysctl -p
+sudo iptables --flush
+sudo iptables --table nat --flush
+sudo iptables --delete-chain
+sudo iptables --table nat --delete-chain
+sudo iptables -t nat -A POSTROUTING -o eno1 -j MASQUERADE
+sudo iptables -A FORWARD -i enp5s0 -o eno1 -j ACCEPT
+sudo iptables -A FORWARD -i eno1 -o enp5s0 -m state --state RELATED,ESTABLISHED -j ACCEPT
+sudo apt-get install iptables-persistent
+sudo netfilter-persistent save
+sudo netfilter-persistent reload
+sudo iptables -L -v -n
+sudo dhcpd -t
+sudo systemctl start isc-dhcp-server
+sudo journalctl -xeu isc-dhcp-server.service
+sudo nano /etc/default/isc-dhcp-server
+sudo systemctl restart isc-dhcp-server
+cat /var/lib/dhcp/dhcpd.leases
+sudo cat /var/lib/dhcp/dhcpd.leases | less
+sudo dhcpd -t
+ip addr
+ping 192.168.133.1
+sudo systemctl stop isc-dhcp-server
+sudo systemctl start isc-dhcp-server
+sudo nano /etc/default/isc-dhcp-server
+sudo systemctl restart isc-dhcp-server
+sudo ifdown eno1 && sudo ifup eno1
+sudo ifdown enp5s0 && sudo ifup enp5s0
+ip addr
+sudo systemctl restart isc-dhcp-server
+sudo nano /etc/default/isc-dhcp-server
+sudo systemctl restart isc-dhcp-server
+cat /var/lib/dhcp/dhcpd.leases
+sudo arp -a
+sudo systemctl restart isc-dhcp-server
+sudo arp -a
+sudo ifdown eno1 && sudo ifup eno1
+sudo ifdown enp5s0 && sudo ifup enp5s0
+sudo systemctl restart isc-dhcp-server
+sudo arp -a
+ip addr
+sudo arp -a
+sudo dhcpd -t
+sudo ifdown eno1 && sudo ifup eno1
+sudo ifdown enp5s0 && sudo ifup enp5s0
+sudo systemctl restart isc-dhcp-server
+sudo arp -a
+sudo dhcpd -t
+wireshark
+sudo apt update
+sudo apt upgrade
+sudo apt install wireshark
+su
+clear
+sudo arp -a
+sudo systemctl stop isc-dhcp-server
+sudo nano /etc/default/isc-dhcp-server
+sudo nano /etc/dhcp/dhcpd.conf
+ip addr show
+ip addr
+clear
+ip addr
+grep dhcpd /var/log/syslog
+cat /var/log/lastlog
+sudo cat /var/log/lastlog
+clear
+sudo arp -a
+ip addr
+sudo service NetworkManager status
+clear
+sudo nano /etc/network/interfaces
+sudo nano /etc/sysctl.conf
+sudo iptables -L -v -n
+sudo nano /etc/dhcp/dhcpd.conf
+sudo dhcpd -t
+sudo arp -a
+sudo nano /etc/default/isc-dhcp-server
+sudo ifdown eno1 && sudo ifup eno1
+sudo ifdown enp5s0 && sudo ifup enp5s0
+ip a
+sudo sysctl -p
+sudo iptables --flush
+sudo iptables --table nat --flush
+sudo iptables --delete-chain
+sudo iptables --table nat --delete-chain
+sudo iptables -t nat -A POSTROUTING -o eno1 -j MASQUERADE
+sudo iptables -A FORWARD -i enp5s0 -o eno1 -j ACCEPT
+sudo iptables -A FORWARD -i eno1 -o enp5s0 -m state --state RELATED,ESTABLISHED -j ACCEPT
+sudo nano /etc/dhcp/dhcpd.conf
+sudo dhcpd -t
+sudo nano /etc/default/isc-dhcp-server
+sudo systemctl restart isc-dhcp-server
+sudo systemctl stop isc-dhcp-server
+$ /etc/init.d/isc-dhcp-server start
+sudo /etc/init.d/isc-dhcp-server start
+sudo nano /etc/default/isc-dhcp-server
+sudo /etc/init.d/isc-dhcp-server start
+cat /var/lib/dhcp/dhcpd.leases
+sudo arp -a
+sudo nano /etc/default/isc-dhcp-server
+sudo systemctl stop isc-dhcp-server
+sudo ifdown enp5s0 && sudo ifup enp5s0
+sudo ifdown eno1 && sudo ifup eno1
+sudo nano /etc/network/interfaces
+sudo arp -a
+sudo nano /etc/dhcp/dhcpd.conf
+cat .bash_history 
+[200~dhcpd -d -f eno1
+
+/etc/init.d/isc-dhcp-server start
+sudo /etc/init.d/isc-dhcp-server start
+sudo systemctl status isc-dhcp-server.service 
+sudo nano /etc/dhcp/dhcpd.conf
+sudo apt-get install iptables-persistent
+sudo netfilter-persistent save
+sudo netfilter-persistent reload
+sudo /etc/init.d/isc-dhcp-server start
+ip addr
+sudo service NetworkManager stop
+sudo service NetworkManager status
+clear
+sudo nano /etc/network/interfaces
+sudo ifconfig -a
+sudo nano /etc/network/interfaces
+sudo ifdown eno1 && sudo ifup eno1
+sudo ifdown enp5s0 && sudo ifup enp5s0
+ip addr
+sudo nano /etc/sysctl.conf
+sudo sysctl -p
+sudo iptables --flush
+sudo iptables --table nat --flush
+sudo iptables --delete-chain
+sudo iptables --table nat --delete-chain
+sudo iptables -t nat -A POSTROUTING -o eno1 -j MASQUERADE
+sudo iptables -A FORWARD -i enp5s0 -o eno1 -j ACCEPT
+sudo iptables -A FORWARD -i eno1 -o enp5s0 -m state --state RELATED,ESTABLISHED -j ACCEPT
+sudo netfilter-persistent save
+sudo netfilter-persistent reload
+sudo iptables -L -v -n
+sudo nano /etc/dhcp/dhcpd.conf
+sudo dhcpd -t
+sudo nano /etc/default/isc-dhcp-server
+sudo /etc/init.d/isc-dhcp-server start
+sudo nano /etc/default/isc-dhcp-server
+sudo /etc/init.d/isc-dhcp-server start
+sudo arp -a
+sudo nano /etc/default/isc-dhcp-server
+sudo /etc/init.d/isc-dhcp-server stop
+sudo /etc/init.d/isc-dhcp-server start
+sudo journalctl -xeu isc-dhcp-server.service
+sudo dhcpd -t
+sudo /etc/init.d/isc-dhcp-server start
+sudo nano /etc/dhcp/dhcpd.conf
+sudo nano /etc/default/isc-dhcp-server
+ping 192.168.133.1
+ping fga.unb.br
+ping 192.168.133.1
+sudo systemctl restart isc-dhcp-server
+sudo nano /etc/network/interfaces
+sudo ifdown eno1 && sudo ifup eno1
+sudo ifdown enp5s0 && sudo ifup enp5s0
+sudo nano /etc/network/interfaces
+sudo ifdown eno1 && sudo ifup eno1
+sudo ifdown enp5s0 && sudo ifup enp5s0
+sudo nano /etc/network/interfaces
+sudo ifdown eno1 && sudo ifup eno1
+sudo ifdown enp5s0 && sudo ifup enp5s0
+sudo nano /etc/network/interfaces
+ip a
+sudo systemctl stop isc-dhcp-server
+sudo ifdown eno1 && sudo ifup eno1
+sudo ifdown enp5s0 && sudo ifup enp5s0
+sudo nano /etc/network/interfaces
+sudo ifdown eno1 && sudo ifup eno1
+sudo ifdown enp5s0 && sudo ifup enp5s0
+ip a
+sudo ifconfig
+sudo ifdown enp5s0 && sudo ifup enp5s0
+sudo nano /etc/network/interfaces
+sudo service NetworkManager status
+sudo ifdown enp5s0 && sudo ifup enp5s0
+sudo nano /etc/network/interfaces
+ip a
+sudo service NetworkManager stop
+sudo service NetworkManager status
+clear
+sudo ifdown eno1 && sudo ifup eno1
+sudo ifdown enp5s0 && sudo ifup enp5s0
+sudo nano /etc/network/interfaces
+sudo ifdown eno1 && sudo ifup eno1
+sudo ifdown enp5s0 && sudo ifup enp5s0
