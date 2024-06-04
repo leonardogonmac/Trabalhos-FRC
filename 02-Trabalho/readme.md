@@ -121,7 +121,9 @@ COLOCAR DESENHO DA REDE MONTADA ???????
 sudo service NetworkManager stop
 ```
 
-![Network Manager](./imgs/server(2)_NetworkManager.png)
+<div style="border: 2px solid black; border-radius: 10px; box-shadow: -5px -5px 15px rgba(0, 0, 0, 0.5); display: inline-block;">
+  <img src="./imgs/server(2)_NetworkManager.png" alt="Network Manager" style="border-radius: 10px; vertical-align: middle;">
+</div>
 
 - E verificamos como estão os IPs das duas placas de rede instaladas no computador usando o comando:
 ```bash
@@ -130,7 +132,9 @@ sudo ifconfig -a
 - E a resposta desse comando foi:
 
 PRINT DA RESPOSTA
-![Server IP Address](./imgs/server(1)_ipaddr.png)
+<div style="border: 2px solid black; border-radius: 10px; box-shadow: -5px -5px 15px rgba(0, 0, 0, 0.5); display: inline-block;">
+  <img src="./imgs/server(1)_ipaddr.png" alt="Server IP Address" style="border-radius: 10px; vertical-align: middle;">
+</div>
 BREVE ANALISE DA RESPOSTA
 
 
@@ -144,7 +148,9 @@ Iniciamos configurando um roteador em que a interface de rede WAN assumisse um I
 ```bash
 sudo nano /etc/network/interfaces
 ```
-![Interfaces eno1 Command](./imgs/server(3)_interfaces_eno1(1)_cmd.png)
+<div style="border: 2px solid black; border-radius: 10px; box-shadow: -5px -5px 15px rgba(0, 0, 0, 0.5); display: inline-block;">
+  <img src="./imgs/server(3)_interfaces_eno1(1)_cmd.png" alt="Interfaces eno1 Command" style="border-radius: 10px; vertical-align: middle;">
+</div>
 
 - Adicionamos (ou modificamos ????) a configuração da interface WAN para colocar essa interface configurável de forma estática, assumindo `eno1`:
 ```plaintext
@@ -154,8 +160,13 @@ iface eno1 inet static
     netmask 255.255.255.0
     gateway 192.168.133.1
 ```
-![Interfaces eno1 Nano](./imgs/server(3)_interfaces_eno1(2)_nano.png)
-![Interfaces eno1 Cat](./imgs/server(3)_interfaces_eno1(3)_cat.png)
+<div style="border: 2px solid black; border-radius: 10px; box-shadow: -5px -5px 15px rgba(0, 0, 0, 0.5); display: inline-block;">
+  <img src="./imgs/server(3)_interfaces_eno1(2)_nano.png" alt="Interfaces eno1 Nano" style="border-radius: 10px; vertical-align: middle;">
+</div>
+
+<div style="border: 2px solid black; border-radius: 10px; box-shadow: -5px -5px 15px rgba(0, 0, 0, 0.5); display: inline-block;">
+  <img src="./imgs/server(3)_interfaces_eno1(3)_cat.png" alt="Interfaces eno1 Cat" style="border-radius: 10px; vertical-align: middle;">
+</div>
 
 #### 6.1.2. Reinicialização da Interface
 - Reiniciamos a interface com o seguinte comando
@@ -171,7 +182,9 @@ sudo ifconfig -a
 - E a resposta desse comando foi:
 
 PRINT DA RESPOSTA
-![eno1 ifdown & ifup](./imgs/server(4)eno1_ifdown_&_ifup.png)
+<div style="border: 2px solid black; border-radius: 10px; box-shadow: -5px -5px 15px rgba(0, 0, 0, 0.5); display: inline-block;">
+  <img src="./imgs/server(4)eno1_ifdown_&_ifup.png" alt="eno1 ifdown & ifup" style="border-radius: 10px; vertical-align: middle;">
+</div>
 BREVE ANALISE DA RESPOSTA
 
 [(Sumário - voltar ao topo)](#top0)
@@ -186,7 +199,9 @@ Em seguida, continuamos a configuração considerando que a rede LAN provida atr
 ```bash
 sudo nano /etc/network/interfaces
 ```
-![Interfaces enp5s0 Command](./imgs/server(5)_interfaces_enp5s0(1)_cmd.png)
+<div style="border: 2px solid black; border-radius: 10px; box-shadow: -5px -5px 15px rgba(0, 0, 0, 0.5); display: inline-block;">
+  <img src="./imgs/server(5)_interfaces_enp5s0(1)_cmd.png" alt="Interfaces enp5s0 Command" style="border-radius: 10px; vertical-align: middle;">
+</div>
 
 - Adicionamos a configuração da interface LAN para colocar essa interface configurável de forma estática, assumindo `enp5s0`:
 ```plaintext
@@ -195,8 +210,13 @@ iface enp5s0 inet static
     address 10.1.0.1
     netmask 255.255.0.0
 ```
-![Interfaces enp5s0 Nano](./imgs/server(5)_interfaces_enp5s0(2)_nano.png)
-![Interfaces enp5s0 Cat](./imgs/server(5)_interfaces_enp5s0(3)_cat.png)
+<div style="border: 2px solid black; border-radius: 10px; box-shadow: -5px -5px 15px rgba(0, 0, 0, 0.5); display: inline-block;">
+  <img src="./imgs/server(5)_interfaces_enp5s0(2)_nano.png" alt="Interfaces enp5s0 Nano" style="border-radius: 10px; vertical-align: middle;">
+</div>
+
+<div style="border: 2px solid black; border-radius: 10px; box-shadow: -5px -5px 15px rgba(0, 0, 0, 0.5); display: inline-block;">
+  <img src="./imgs/server(5)_interfaces_enp5s0(3)_cat.png" alt="Interfaces enp5s0 Cat" style="border-radius: 10px; vertical-align: middle;">
+</div>
 
 #### 6.2.2. Reinicialização da Interface
 - Reiniciamos a interface com o seguinte comando:
@@ -212,7 +232,9 @@ sudo ifconfig
 - E a resposta desse comando foi:
 
 PRINT DA RESPOSTA
-![enp5s0 ifdown & ifup](./imgs/server(6)enp5s0_ifdown_&_ifup.png)
+<div style="border: 2px solid black; border-radius: 10px; box-shadow: -5px -5px 15px rgba(0, 0, 0, 0.5); display: inline-block;">
+  <img src="./imgs/server(6)enp5s0_ifdown_&_ifup.png" alt="enp5s0 ifdown & ifup" style="border-radius: 10px; vertical-align: middle;">
+</div>
 BREVE ANALISE DA RESPOSTA
 
 [(Sumário - voltar ao topo)](#top0)
@@ -227,19 +249,25 @@ Para realizar o mapeamento entre o IP da rede de acesso e os IPs da rede privada
 ```bash
 sudo nano /etc/sysctl.conf
 ```
-![sysctl Command](./imgs/server(7)_sysctl(1)_cmd.png)
+<div style="border: 2px solid black; border-radius: 10px; box-shadow: -5px -5px 15px rgba(0, 0, 0, 0.5); display: inline-block;">
+  <img src="./imgs/server(7)_sysctl(1)_cmd.png" alt="sysctl Command" style="border-radius: 10px; vertical-align: middle;">
+</div>
 
 - Removemos o comentário da seguinte linha para ativar o encaminhamento de pacotes IP (_IP forwarding_)::
 ```plaintext
 net.ipv4.ip_forward=1
 ```
-![sysctl Nano](./imgs/server(7)_sysctl(2)_nano.png)
+<div style="border: 2px solid black; border-radius: 10px; box-shadow: -5px -5px 15px rgba(0, 0, 0, 0.5); display: inline-block;">
+  <img src="./imgs/server(7)_sysctl(2)_nano.png" alt="sysctl Nano" style="border-radius: 10px; vertical-align: middle;">
+</div>
 
 - Aplicamos a mudança:
 ```bash
 sudo sysctl -p
 ```
-![sudo sysctl -p](./imgs/server(7)_sysctl(3)_sudo-p.png)
+<div style="border: 2px solid black; border-radius: 10px; box-shadow: -5px -5px 15px rgba(0, 0, 0, 0.5); display: inline-block;">
+  <img src="./imgs/server(7)_sysctl(3)_sudo-p.png" alt="sudo sysctl -p" style="border-radius: 10px; vertical-align: middle;">
+</div>
 
 #### 6.3.2. Configuração do iptables para NAT
 - Após a configuração da interface de saída WAN (eno1) e a configuração da interface interna LAN (enp5s0) sem DHCP, realizamos a limpeza de eventuais regras de _firewall_ presentes no equipamento:
@@ -252,7 +280,9 @@ sudo iptables -t nat -A POSTROUTING -o eno1 -j MASQUERADE
 sudo iptables -A FORWARD -i enp5s0 -o eno1 -j ACCEPT
 sudo iptables -A FORWARD -i eno1 -o enp5s0 -m state --state RELATED,ESTABLISHED -j ACCEPT
 ```
-![iptables Flush](./imgs/server(8)_iptables(1)_flush.png)
+<div style="border: 2px solid black; border-radius: 10px; box-shadow: -5px -5px 15px rgba(0, 0, 0, 0.5); display: inline-block;">
+  <img src="./imgs/server(8)_iptables(1)_flush.png" alt="iptables Flush" style="border-radius: 10px; vertical-align: middle;">
+</div>
 NO EXPERIMENTO DO TCC NAO TEM A ULTIMA LINHA. PRECISA?????
 
 #### 6.3.3. Salvar a Configuração do iptables
@@ -262,14 +292,20 @@ sudo apt-get install iptables-persistent
 sudo netfilter-persistent save
 sudo netfilter-persistent reload
 ```
-![iptables Persistent Save](./imgs/server(8)_iptables(3)_persistent-save.png)
+<div style="border: 2px solid black; border-radius: 10px; box-shadow: -5px -5px 15px rgba(0, 0, 0, 0.5); display: inline-block;">
+  <img src="./imgs/server(8)_iptables(3)_persistent-save.png" alt="iptables Persistent Save" style="border-radius: 10px; vertical-align: middle;">
+</div>
 6.3.3 NAO TEM NO EXPERIMENTO DO TCC. PRECISA FAZER????????
 
 
 ```bash
 sudo iptables -L -v -n
 ```
-![iptables List Verbose](./imgs/server(8)_iptables(2)_Lvn.png)
+
+<div style="border: 2px solid black; border-radius: 10px; box-shadow: -5px -5px 15px rgba(0, 0, 0, 0.5); display: inline-block;">
+  <img src="./imgs/server(8)_iptables(2)_Lvn.png" alt="iptables List Verbose" style="border-radius: 10px; vertical-align: middle;">
+</div>
+
 <a name="top6.4"></a>
 
 ### 6.4. Configuração do Serviço DHCP
@@ -287,7 +323,9 @@ sudo apt-get install isc-dhcp-server
 ```bash
 sudo nano /etc/dhcp/dhcpd.conf
 ```
-![DHCP Configuration Command](./imgs/server(9)_dhcp-conf(1)_cmd.png)
+<div style="border: 2px solid black; border-radius: 10px; box-shadow: -5px -5px 15px rgba(0, 0, 0, 0.5); display: inline-block;">
+  <img src="./imgs/server(9)_dhcp-conf(1)_cmd.png" alt="DHCP Configuration Command" style="border-radius: 10px; vertical-align: middle;">
+</div>
  
 ATENÇÃO: É normal ocorrer uma falha, pois, ao finalizar a instalação, ele tenta iniciar o servidor que não tem nenhum escopo DHCP criado ainda. (TCC)
 
@@ -300,7 +338,9 @@ subnet 10.1.0.0 netmask 255.255.0.0 {
     option domain-name-servers 192.168.133.1;
 }
 ```
-![DHCP Configuration Nano](./imgs/server(9)_dhcp-conf(2)_nano.png)
+<div style="border: 2px solid black; border-radius: 10px; box-shadow: -5px -5px 15px rgba(0, 0, 0, 0.5); display: inline-block;">
+  <img src="./imgs/server(9)_dhcp-conf(2)_nano.png" alt="DHCP Configuration Nano" style="border-radius: 10px; vertical-align: middle;">
+</div>
 
 ==================================================
 NO TCC TA DIFERENTE. QUAL VAMOS USAR??????
@@ -340,46 +380,60 @@ host haagen {
 ```bash
 sudo dhcpd -t
 ```
-![DHCP Test](./imgs/server(10)_dhcp-t.png)
 
 - E a resposta desse comando foi:
 
 PRINT DA RESPOSTA
+<div style="border: 2px solid black; border-radius: 10px; box-shadow: -5px -5px 15px rgba(0, 0, 0, 0.5); display: inline-block;">
+  <img src="./imgs/server(10)_dhcp-t.png" alt="DHCP Test" style="border-radius: 10px; vertical-align: middle;">
+</div>
 BREVE ANALISE DA RESPOSTA
 
 
 #### 6.4.3. Configuração de uma Lease Estática
 - Para determinada máquina de testes de configurações da LAN criada, vinculamos um endereço IP de forma que aquele equipamento receba sempre o mesmo endereço como oferta do servidor DHCP. Para isso, adicionamos ao arquivo `/etc/dhcp/dhcpd.conf` as linhas de comando a seguir:
 
-![DHCP Lease Command](./imgs/server(9)_dhcp-conf(3)_cmd-lease.png)
+<div style="border: 2px solid black; border-radius: 10px; box-shadow: -5px -5px 15px rgba(0, 0, 0, 0.5); display: inline-block;">
+  <img src="./imgs/server(9)_dhcp-conf(3)_cmd-lease.png" alt="DHCP Lease Command" style="border-radius: 10px; vertical-align: middle;">
+</div>
+
 ```plaintext
 host test-machine {
    hardware ethernet DC:0E:A1:C8:AE:68; # MAC address da máquina de teste
    fixed-address 10.1.0.50;
 }
 ```
-![DHCP Lease Nano](./imgs/server(9)_dhcp-conf(4)_nano-lease.png)
+<div style="border: 2px solid black; border-radius: 10px; box-shadow: -5px -5px 15px rgba(0, 0, 0, 0.5); display: inline-block;">
+  <img src="./imgs/server(9)_dhcp-conf(4)_nano-lease.png" alt="DHCP Lease Nano" style="border-radius: 10px; vertical-align: middle;">
+</div>
 
 #### 6.4.4. Definição da Interface para o Servidor DHCP
 - Editamos o arquivo `/etc/default/isc-dhcp-server`:
 ```bash
 sudo nano /etc/default/isc-dhcp-server
 ```
-![ISC DHCP Server Command](./imgs/server(11)_isc-dhcp-server(1)_cmd.png)
+<div style="border: 2px solid black; border-radius: 10px; box-shadow: -5px -5px 15px rgba(0, 0, 0, 0.5); display: inline-block;">
+  <img src="./imgs/server(11)_isc-dhcp-server(1)_cmd.png" alt="ISC DHCP Server Command" style="border-radius: 10px; vertical-align: middle;">
+</div>
 
 - Adicionamos (ou modificamos ?????) a linha a seguir para sempre disparar o serviço somente na interface eno1:
 ```plaintext
 INTERFACESv4="eno1"   
 ```
-![ISC DHCP Server Nano](./imgs/server(11)_isc-dhcp-server(2)_nano.png)
 
+<div style="border: 2px solid black; border-radius: 10px; box-shadow: -5px -5px 15px rgba(0, 0, 0, 0.5); display: inline-block;">
+  <img src="./imgs/server(11)_isc-dhcp-server(2)_nano.png" alt="ISC DHCP Server Nano" style="border-radius: 10px; vertical-align: middle;">
+</div>
 
 #### 6.4.5. Reinicialização do Serviço DHCP
 - Após todas as configurações feitas, é necessário reinicializar o servidor para que as alterações tenham efeito.
 ```bash
 sudo systemctl restart isc-dhcp-server
 ```
-![ISC DHCP Server Restart](./imgs/server(11)_isc-dhcp-server(3)_cmd-restart.png)
+
+<div style="border: 2px solid black; border-radius: 10px; box-shadow: -5px -5px 15px rgba(0, 0, 0, 0.5); display: inline-block;">
+  <img src="./imgs/server(11)_isc-dhcp-server(3)_cmd-restart.png" alt="ISC DHCP Server Restart" style="border-radius: 10px; vertical-align: middle;">
+</div>
 
 Indique como conferir as leases providas pelo servidor DHCP em arquivos de log.
 #### 6.4.6. Verificação das Leases DHCP
@@ -391,7 +445,9 @@ cat /var/lib/dhcp/dhcpd.leases
 - E a resposta desse comando foi:
 
 PRINT DA RESPOSTA
-![Verify Lease](./imgs/server(12)_verifica-lease.png)
+<div style="border: 2px solid black; border-radius: 10px; box-shadow: -5px -5px 15px rgba(0, 0, 0, 0.5); display: inline-block;">
+  <img src="./imgs/server(12)_verifica-lease.png" alt="Verify Lease" style="border-radius: 10px; vertical-align: middle;">
+</div>
 BREVE ANALISE DA RESPOSTA
 
 Reescrever a parte abaixo, está igual ao TCC
@@ -417,8 +473,13 @@ Através do arquivo de leases, verifique as concessões ativas do servidor dhcp:
 ``` bash
 sudo cat /var/lib/dhcp/dhcpd.leases | less
 ```
-![ARP Table](./imgs/server(13)_arp-a.png)
-![Client 1](./imgs/client(1)_Ethernet.png)
+<div style="border: 2px solid black; border-radius: 10px; box-shadow: -5px -5px 15px rgba(0, 0, 0, 0.5); display: inline-block;">
+  <img src="./imgs/server(13)_arp-a.png" alt="ARP Table" style="border-radius: 10px; vertical-align: middle;">
+</div>
+
+<div style="border: 2px solid black; border-radius: 10px; box-shadow: -5px -5px 15px rgba(0, 0, 0, 0.5); display: inline-block;">
+  <img src="./imgs/client(1)_Ethernet.PNG" alt="Ethernet" style="border-radius: 10px; vertical-align: middle;">
+</div>
 
 =====
 
@@ -446,7 +507,9 @@ ping 192.168.133.1
   - Obtemos a seguinte resposta:
 
     PRINT DA RESPOSTA
-    ![Client 3](./imgs/client(3)_ping-133-1.png)
+<div style="border: 2px solid black; border-radius: 10px; box-shadow: -5px -5px 15px rgba(0, 0, 0, 0.5); display: inline-block;">
+<img src="./imgs/client(3)_ping-133-1.PNG" alt="Ping to 133.1" style="border-radius: 10px; vertical-align: middle;">
+</div>
     BREVE ANALISE DA RESPOSTA
 
 #### 7.1.2. Teste de conectividade entre equipamentos da rede privada e equipamentos situados na rede de saída do gateway
@@ -478,7 +541,9 @@ ping 10.1.0.1
 ```
 
 - Obtemos a seguinte resposta:
-![Client 2](./imgs/client(2)_ping-10-1-0-1.png)
+<div style="border: 2px solid black; border-radius: 10px; box-shadow: -5px -5px 15px rgba(0, 0, 0, 0.5); display: inline-block;">
+  <img src="./imgs/client(2)_ping-10-1-0-1.PNG" alt="Ping to 10.1.0.1" style="border-radius: 10px; vertical-align: middle;">
+</div>
 
 ### 7.2. Validar NAT
 Tradução de endereço (NAT)
@@ -489,7 +554,11 @@ Tradução de endereço (NAT)
 ```bash
 ping 8.8.8.8
 ```
-![Client 6](./imgs/client(6)_tracert-8-8-8-8.png)
+
+<div style="border: 2px solid black; border-radius: 10px; box-shadow: -5px -5px 15px rgba(0, 0, 0, 0.5); display: inline-block;">
+  <img src="./imgs/client(6)_tracert-8-8-8-8.PNG" alt="Traceroute to 8.8.8.8" style="border-radius: 10px; vertical-align: middle;">
+</div>
+
 ### 7.3. Isolamento de Segmento
 Tradução de endereço (NAT)
 
@@ -500,7 +569,9 @@ Tradução de endereço (NAT)
 ping 192.168.133.2 # Deve responder
 ping 192.168.133.3 # Não deve responder (a menos que configurado de outra forma)
 ```
-![Client 13](./imgs/client(13)_ping-133-3&4.png)
+<div style="border: 2px solid black; border-radius: 10px; box-shadow: -5px -5px 15px rgba(0, 0, 0, 0.5); display: inline-block;">
+  <img src="./imgs/client(13)_ping-133-3&4.PNG" alt="Ping to 133.3 & 4" style="border-radius: 10px; vertical-align: middle;">
+</div>
 
 <a name="top7"></a>
 
