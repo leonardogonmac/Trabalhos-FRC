@@ -121,6 +121,8 @@ COLOCAR DESENHO DA REDE MONTADA ???????
 sudo service NetworkManager stop
 ```
 
+![Network Manager](./imgs/server(2)_NetworkManager.png)
+
 - E verificamos como estão os IPs das duas placas de rede instaladas no computador usando o comando:
 ```bash
 sudo ifconfig -a
@@ -128,6 +130,7 @@ sudo ifconfig -a
 - E a resposta desse comando foi:
 
 PRINT DA RESPOSTA
+![Server IP Address](./imgs/server(1)_ipaddr.png)
 BREVE ANALISE DA RESPOSTA
 
 
@@ -141,6 +144,7 @@ Iniciamos configurando um roteador em que a interface de rede WAN assumisse um I
 ```bash
 sudo nano /etc/network/interfaces
 ```
+![Interfaces eno1 Command](./imgs/server(3)_interfaces_eno1(1)_cmd.png)
 
 - Adicionamos (ou modificamos ????) a configuração da interface WAN para colocar essa interface configurável de forma estática, assumindo `eno1`:
 ```plaintext
@@ -150,6 +154,8 @@ iface eno1 inet static
     netmask 255.255.255.0
     gateway 192.168.133.1
 ```
+![Interfaces eno1 Nano](./imgs/server(3)_interfaces_eno1(2)_nano.png)
+![Interfaces eno1 Cat](./imgs/server(3)_interfaces_eno1(3)_cat.png)
 
 #### 6.1.2. Reinicialização da Interface
 - Reiniciamos a interface com o seguinte comando
@@ -165,6 +171,7 @@ sudo ifconfig -a
 - E a resposta desse comando foi:
 
 PRINT DA RESPOSTA
+![eno1 ifdown & ifup](./imgs/server(4)eno1_ifdown_&_ifup.png)
 BREVE ANALISE DA RESPOSTA
 
 [(Sumário - voltar ao topo)](#top0)
@@ -179,6 +186,7 @@ Em seguida, continuamos a configuração considerando que a rede LAN provida atr
 ```bash
 sudo nano /etc/network/interfaces
 ```
+![Interfaces enp5s0 Command](./imgs/server(5)_interfaces_enp5s0(1)_cmd.png)
 
 - Adicionamos a configuração da interface LAN para colocar essa interface configurável de forma estática, assumindo `enp5s0`:
 ```plaintext
@@ -187,6 +195,8 @@ iface enp5s0 inet static
     address 10.1.0.1
     netmask 255.255.0.0
 ```
+![Interfaces enp5s0 Nano](./imgs/server(5)_interfaces_enp5s0(2)_nano.png)
+![Interfaces enp5s0 Cat](./imgs/server(5)_interfaces_enp5s0(3)_cat.png)
 
 #### 6.2.2. Reinicialização da Interface
 - Reiniciamos a interface com o seguinte comando:
@@ -202,6 +212,7 @@ sudo ifconfig
 - E a resposta desse comando foi:
 
 PRINT DA RESPOSTA
+![enp5s0 ifdown & ifup](./imgs/server(6)enp5s0_ifdown_&_ifup.png)
 BREVE ANALISE DA RESPOSTA
 
 [(Sumário - voltar ao topo)](#top0)
@@ -216,16 +227,19 @@ Para realizar o mapeamento entre o IP da rede de acesso e os IPs da rede privada
 ```bash
 sudo nano /etc/sysctl.conf
 ```
+![sysctl Command](./imgs/server(7)_sysctl(1)_cmd.png)
 
 - Removemos o comentário da seguinte linha para ativar o encaminhamento de pacotes IP (_IP forwarding_)::
 ```plaintext
 net.ipv4.ip_forward=1
 ```
+![sysctl Nano](./imgs/server(7)_sysctl(2)_nano.png)
 
 - Aplicamos a mudança:
 ```bash
 sudo sysctl -p
 ```
+![sudo sysctl -p](./imgs/server(7)_sysctl(3)_sudo-p.png)
 
 #### 6.3.2. Configuração do iptables para NAT
 - Após a configuração da interface de saída WAN (eno1) e a configuração da interface interna LAN (enp5s0) sem DHCP, realizamos a limpeza de eventuais regras de _firewall_ presentes no equipamento:
@@ -238,6 +252,7 @@ sudo iptables -t nat -A POSTROUTING -o eno1 -j MASQUERADE
 sudo iptables -A FORWARD -i enp5s0 -o eno1 -j ACCEPT
 sudo iptables -A FORWARD -i eno1 -o enp5s0 -m state --state RELATED,ESTABLISHED -j ACCEPT
 ```
+![iptables Flush](./imgs/server(8)_iptables(1)_flush.png)
 NO EXPERIMENTO DO TCC NAO TEM A ULTIMA LINHA. PRECISA?????
 
 #### 6.3.3. Salvar a Configuração do iptables
@@ -247,12 +262,14 @@ sudo apt-get install iptables-persistent
 sudo netfilter-persistent save
 sudo netfilter-persistent reload
 ```
+![iptables Persistent Save](./imgs/server(8)_iptables(3)_persistent-save.png)
 6.3.3 NAO TEM NO EXPERIMENTO DO TCC. PRECISA FAZER????????
 
 
 ```bash
 sudo iptables -L -v -n
 ```
+![iptables List Verbose](./imgs/server(8)_iptables(2)_Lvn.png)
 <a name="top6.4"></a>
 
 ### 6.4. Configuração do Serviço DHCP
@@ -270,6 +287,7 @@ sudo apt-get install isc-dhcp-server
 ```bash
 sudo nano /etc/dhcp/dhcpd.conf
 ```
+![DHCP Configuration Command](./imgs/server(9)_dhcp-conf(1)_cmd.png)
  
 ATENÇÃO: É normal ocorrer uma falha, pois, ao finalizar a instalação, ele tenta iniciar o servidor que não tem nenhum escopo DHCP criado ainda. (TCC)
 
@@ -282,6 +300,7 @@ subnet 10.1.0.0 netmask 255.255.0.0 {
     option domain-name-servers 192.168.133.1;
 }
 ```
+![DHCP Configuration Nano](./imgs/server(9)_dhcp-conf(2)_nano.png)
 
 ==================================================
 NO TCC TA DIFERENTE. QUAL VAMOS USAR??????
@@ -321,6 +340,7 @@ host haagen {
 ```bash
 sudo dhcpd -t
 ```
+![DHCP Test](./imgs/server(10)_dhcp-t.png)
 
 - E a resposta desse comando foi:
 
@@ -330,23 +350,28 @@ BREVE ANALISE DA RESPOSTA
 
 #### 6.4.3. Configuração de uma Lease Estática
 - Para determinada máquina de testes de configurações da LAN criada, vinculamos um endereço IP de forma que aquele equipamento receba sempre o mesmo endereço como oferta do servidor DHCP. Para isso, adicionamos ao arquivo `/etc/dhcp/dhcpd.conf` as linhas de comando a seguir:
+
+![DHCP Lease Command](./imgs/server(9)_dhcp-conf(3)_cmd-lease.png)
 ```plaintext
 host test-machine {
    hardware ethernet DC:0E:A1:C8:AE:68; # MAC address da máquina de teste
    fixed-address 10.1.0.50;
 }
 ```
+![DHCP Lease Nano](./imgs/server(9)_dhcp-conf(4)_nano-lease.png)
 
 #### 6.4.4. Definição da Interface para o Servidor DHCP
 - Editamos o arquivo `/etc/default/isc-dhcp-server`:
 ```bash
 sudo nano /etc/default/isc-dhcp-server
 ```
+![ISC DHCP Server Command](./imgs/server(11)_isc-dhcp-server(1)_cmd.png)
 
-- Adicionamos (ou modificamos ?????) a linha a seguir para sempre disparar o serviço somente na interface enp5s0:
+- Adicionamos (ou modificamos ?????) a linha a seguir para sempre disparar o serviço somente na interface eno1:
 ```plaintext
-INTERFACESv4="enp5s0"   
+INTERFACESv4="eno1"   
 ```
+![ISC DHCP Server Nano](./imgs/server(11)_isc-dhcp-server(2)_nano.png)
 
 
 #### 6.4.5. Reinicialização do Serviço DHCP
@@ -354,6 +379,7 @@ INTERFACESv4="enp5s0"
 ```bash
 sudo systemctl restart isc-dhcp-server
 ```
+![ISC DHCP Server Restart](./imgs/server(11)_isc-dhcp-server(3)_cmd-restart.png)
 
 Indique como conferir as leases providas pelo servidor DHCP em arquivos de log.
 #### 6.4.6. Verificação das Leases DHCP
@@ -365,6 +391,7 @@ cat /var/lib/dhcp/dhcpd.leases
 - E a resposta desse comando foi:
 
 PRINT DA RESPOSTA
+![Verify Lease](./imgs/server(12)_verifica-lease.png)
 BREVE ANALISE DA RESPOSTA
 
 Reescrever a parte abaixo, está igual ao TCC
@@ -390,6 +417,9 @@ Através do arquivo de leases, verifique as concessões ativas do servidor dhcp:
 ``` bash
 sudo cat /var/lib/dhcp/dhcpd.leases | less
 ```
+![ARP Table](./imgs/server(13)_arp-a.png)
+![Client 1](./imgs/client(1)_Ethernet.png)
+
 =====
 
 <a name="top7"></a>
@@ -416,6 +446,7 @@ ping 192.168.133.1
   - Obtemos a seguinte resposta:
 
     PRINT DA RESPOSTA
+    ![Client 3](./imgs/client(3)_ping-133-1.png)
     BREVE ANALISE DA RESPOSTA
 
 #### 7.1.2. Teste de conectividade entre equipamentos da rede privada e equipamentos situados na rede de saída do gateway
@@ -443,12 +474,11 @@ ping 192.168.133.1    ALTERAR IP PARA UM COMPUTADOR FORA DA REDE
 - Em uma máquina cliente da rede LAN, obtenha um endereço IP e teste a conectividade:
 ```bash
 dhclient eno1
-ping 10.0.0.1
+ping 10.1.0.1
 ```
 
 - Obtemos a seguinte resposta:
-
-PRINT DA RESPOSTA
+![Client 2](./imgs/client(2)_ping-10-1-0-1.png)
 
 ### 7.2. Validar NAT
 Tradução de endereço (NAT)
@@ -459,6 +489,7 @@ Tradução de endereço (NAT)
 ```bash
 ping 8.8.8.8
 ```
+![Client 6](./imgs/client(6)_tracert-8-8-8-8.png)
 ### 7.3. Isolamento de Segmento
 Tradução de endereço (NAT)
 
@@ -469,7 +500,7 @@ Tradução de endereço (NAT)
 ping 192.168.133.2 # Deve responder
 ping 192.168.133.3 # Não deve responder (a menos que configurado de outra forma)
 ```
-
+![Client 13](./imgs/client(13)_ping-133-3&4.png)
 
 <a name="top7"></a>
 
