@@ -35,8 +35,8 @@ o quais são as limitações conhecidas  -->
       - [5.4.1. Instalação do Servidor DHCP](#541-instalação-do-servidor-dhcp)
       - [5.4.2. Configuração do Servidor DHCP](#542-configuração-do-servidor-dhcp)
       - [5.4.3. Configuração de uma Lease Estática](#543-configuração-de-uma-lease-estática)
-      - [5.4.4. Reinicialização do Serviço DHCP](#544-reinicialização-do-serviço-dhcp)
-      - [5.4.5. Definição da Interface para o Servidor DHCP](#545-definição-da-interface-para-o-servidor-dhcp)
+      - [5.4.4. Definição da Interface para o Servidor DHCP](#544-definição-da-interface-para-o-servidor-dhcp)
+      - [5.4.5. Reinicialização do Serviço DHCP](#545-reinicialização-do-serviço-dhcp)
       - [5.4.6. Verificação das Leases DHCP](#546-verificação-das-leases-dhcp)
   - [6. Testes e Validação](#6-testes-e-validação)
     - [6.1 Validar Conectividade WAN e LAN](#61-validar-conectividade-wan-e-lan)
@@ -74,11 +74,17 @@ O sistema operacional utilizado foi o Debian, versão 12.5.0.
 
 ## 4. Principais ferramentas utilizadas
 
-Utilizamos as seguintes ferramentas para o presente trabalho, entre outras:
+A seguir, listamos as principais ferrramentas e os aquivos de configuração que foram alterados.
 
-* Configuração de rede: `ifconfig`, `ip addr`
-* Configuração de NAT: `iptables`
-* Configuração de DHCP: `isc-dhcp-server`
+* Configuração de rede: 
+  * `ip addr`, `nano`, `cat`
+  * `/etc/network/interfaces`
+  * `/etc/sysctl.conf`
+* Configuração de NAT: 
+  * `iptables`
+* Configuração de DHCP: 
+  * `/etc/default/isc-dhcp-server`
+  * `/etc/dhcp/dhcpd.conf` 
 
 [(Sumário - voltar ao topo)](#top0)
 
@@ -522,17 +528,8 @@ A figura 16 mostra as alterações feitas.
 </center>
 <br>
 
-#### 5.4.4. Reinicialização do Serviço DHCP
 
-Após todas as configurações feitas, reinicializamos o servidor para que as alterações tivessem efeito.
-
-```bash
-sudo /etc/init.d/isc-dhcp-server start
-```
-
-<br>
-
-#### 5.4.5. Definição da Interface para o Servidor DHCP
+#### 5.4.4. Definição da Interface para o Servidor DHCP
 
 Editamos o arquivo `/etc/default/isc-dhcp-server`:
 
@@ -555,6 +552,17 @@ INTERFACESv4="enp5s0"
 <font size="2"><p style="text-align: center"><b>Figura 17 - Arquivo /etc/default/isc-dhcp-server editado</b></p></font>
 </div>
 </center>
+<br>
+
+
+#### 5.4.5. Reinicialização do Serviço DHCP
+
+Após todas as configurações feitas, reinicializamos o servidor para que as alterações tivessem efeito.
+
+```bash
+sudo /etc/init.d/isc-dhcp-server start
+```
+
 <br>
 
 #### 5.4.6. Verificação das Leases DHCP
@@ -619,7 +627,7 @@ Depois voltamos para o servidor e utilizamos o comando abaixo para exibir a tabe
 sudo arp -a
 ```
 
-Obtivemos a resposta ilustrada na figura 19 abaixo:
+Obtivemos a resposta ilustrada na figura 20 abaixo:
 
 <br>
 <center>
@@ -627,7 +635,7 @@ Obtivemos a resposta ilustrada na figura 19 abaixo:
   <img src="./imgs/server(13)_arp-a2.png" alt="ARP Table" style="border-radius: 10px; vertical-align: middle;">
 </div>
 <div >
-<font size="2"><p style="text-align: center"><b>Figura 19 - Resposta do comando sudo arp -a</b></p></font>
+<font size="2"><p style="text-align: center"><b>Figura 20 - Resposta do comando sudo arp -a</b></p></font>
 </div>
 </center>
 <br>
@@ -640,6 +648,23 @@ Verificamos que o endereço IP **10.1.0.50** foi resolvido para o MAC Address da
 
 ### 6.1 Validar Conectividade WAN e LAN
 
+
+Através do comando `netstat` podemos observar a tabela de roteamento do kernel, que mostra como os pacotes de rede são encaminhados em um sistema. A tabela de roteamento inclui informações sobre destinos de rede, máscaras de rede, gateways e interfaces de rede associadas. 
+
+```bash
+sudo netstat -r
+```
+
+Na figura 21, é possível confirmar que as rotas configuradas estão ativas (`Opções = U`). 
+<br>
+<center>
+<div style="border: 1px solid black; border-radius: 10px; box-shadow: -5px -5px 15px rgba(0, 0, 0, 0.5); display: inline-block;">
+  <img src="./imgs/server(15)_netstat.png" alt="ARP Table" style="border-radius: 10px; vertical-align: middle;">
+</div>
+<div >
+<font size="2"><p style="text-align: center"><b>Figura 21 - Resposta do comando sudo arp -a</b></p></font>
+</div>
+</center>
 <br>
 
 #### 6.1.1. Conectividade com o gateway
@@ -650,7 +675,7 @@ A partir do equipamento de teste da rede privada verificamos a conectividade WAN
 ping 192.168.133.1
 ```
 
-Obtivemos a seguinte resposta (figura 20) comprovando a conexão entre um equipamento da rede privada e o gateway da rede WAN.
+Obtivemos a seguinte resposta (figura 22) comprovando a conexão entre um equipamento da rede privada e o gateway da rede WAN.
 
 <br>
 <center>
@@ -658,12 +683,12 @@ Obtivemos a seguinte resposta (figura 20) comprovando a conexão entre um equipa
 <img src="./imgs/client(3)_ping-133-1.PNG" alt="Ping to 133.1" style="border-radius: 10px; vertical-align: middle;">
 </div>
 <div >
-<font size="2"><p style="text-align: center"><b>Figura 20 - Teste de conexão com o gateway da rede WAN</b></p></font>
+<font size="2"><p style="text-align: center"><b>Figura 22 - Teste de conexão com o gateway da rede WAN</b></p></font>
 </div>
 </center>
 <br>
 
-Testamos também a conexão LAN com o gateway da rede privada como mostra a figura 21.
+Testamos também a conexão LAN com o gateway da rede privada como mostra a figura 23.
 
 <br>
 <center>
@@ -671,7 +696,7 @@ Testamos também a conexão LAN com o gateway da rede privada como mostra a figu
   <img src="./imgs/client(2)_ping-10-1-0-1.PNG" alt="Ping to 10.1.0.1" style="border-radius: 10px; vertical-align: middle;">
 </div>
 <div >
-<font size="2"><p style="text-align: center"><b>Figura 21 - Teste de conexão com o gateway da rede LAN</b></p></font>
+<font size="2"><p style="text-align: center"><b>Figura 23 - Teste de conexão com o gateway da rede LAN</b></p></font>
 </div>
 </center>
 <br>
@@ -684,7 +709,7 @@ Também tentamos enviar pacotes ICMP a partir da máquina de teste para algum ou
 ping 192.168.133.200
 ```
 
-Obtivemos a seguinte resposta (figura 22) mostrando a conexão bem sucedida.
+Obtivemos a seguinte resposta (figura 24) mostrando a conexão bem sucedida.
 
 <br>
 <center>
@@ -692,7 +717,7 @@ Obtivemos a seguinte resposta (figura 22) mostrando a conexão bem sucedida.
 <img src="./imgs/client(14)_ping-133-200.PNG" alt="Ping to 133.1" style="border-radius: 10px; vertical-align: middle;">
 </div>
 <div >
-<font size="2"><p style="text-align: center"><b>Figura 22 - Teste de conexão com o 192.168.133.200</b></p></font>
+<font size="2"><p style="text-align: center"><b>Figura 24 - Teste de conexão com o 192.168.133.200</b></p></font>
 </div>
 </center>
 <br>
@@ -707,7 +732,7 @@ ping 192.168.43.39
 tracert 192.168.43.39
 ```
 
-O resultado (figura 23) mostra que os pacotes trafegam até certo ponto e depois são bloqueados.
+O resultado (figura 25) mostra que os pacotes trafegam até certo ponto e depois são bloqueados.
 
 <br>
 <center>
@@ -715,7 +740,7 @@ O resultado (figura 23) mostra que os pacotes trafegam até certo ponto e depois
 <img src="./imgs/client(15)_ping-192-168-43-39.PNG" alt="Ping to 133.1" style="border-radius: 10px; vertical-align: middle;">
 </div>
 <div >
-<font size="2"><p style="text-align: center"><b>Figura 23 - Teste de conexão com o 192.168.43.39</b></p></font>
+<font size="2"><p style="text-align: center"><b>Figura 25 - Teste de conexão com o 192.168.43.39</b></p></font>
 </div>
 </center>
 <br>
@@ -727,14 +752,14 @@ Para verificar se a tradução de endereço (NAT) foi configurada corretamente, 
 
 #### 6.2.1. Testar Tradução de Endereços
 
-Primeiramente instalamos a ferramenta e depois usamos o comando para monitorar o tráfego da nossa rede LAN pela interface `enp5s0`:
+Primeiramente instalamos a ferramenta `tcpdump` e depois usamos o comando para monitorar o tráfego da nossa rede LAN pela interface `enp5s0` (LAN):
 
 ```bash
 sudo apt-get install tcpdump
 sudo tcpdump -i enp5s0
 ```
 
-Na figura 23 é possível observar a captura de pacotes na interface LAN.
+Na figura 26 é possível observar a captura de pacotes na interface LAN.
 
 <br>
 <center>
@@ -742,7 +767,7 @@ Na figura 23 é possível observar a captura de pacotes na interface LAN.
   <img src="./imgs/server(14)_tcpdump.png" alt="Traceroute to 8.8.8.8" style="border-radius: 10px; vertical-align: middle; " >
 </div>
 <div >
-<font size="2"><p style="text-align: center"><b>Figura 23 - Configuração da rede</b></p></font>
+<font size="2"><p style="text-align: center"><b>Figura 26 - Configuração da rede</b></p></font>
 </div>
 </center>
 <br>
@@ -774,7 +799,7 @@ Para verificar o encaminhamento a partir da máquina de teste para um endereço 
 tracert fga.unb.br
 ```
 
-Obtivemos a seguinte resposta (figura 24) mostrando que o acesso é feito através do gateway da LAN, depois através do gateway da rede de acesso e em seguida alcançando o destino.
+Obtivemos a seguinte resposta (figura 27) mostrando que o acesso é feito através do gateway da LAN, depois através do gateway da rede de acesso e em seguida alcançando o destino.
 
 <br>
 <center>
@@ -782,7 +807,7 @@ Obtivemos a seguinte resposta (figura 24) mostrando que o acesso é feito atrav�
 <img src="./imgs/client(8)_tracert-fga.PNG" alt="Ping to 133.1" style="border-radius: 10px; vertical-align: middle;">
 </div>
 <div >
-<font size="2"><p style="text-align: center"><b>Figura 22 - Teste de conexão com o 192.168.133.200</b></p></font>
+<font size="2"><p style="text-align: center"><b>Figura 27 - Teste de conexão com o 192.168.133.200</b></p></font>
 </div>
 </center>
 <br>
@@ -793,18 +818,20 @@ Para testar se um equipamento externo não conseguia acessar um IP da rede priva
 ping 10.1.0.19
 ```
 
+A figura 28 mostra o resultado. A conexão não foi realizada como era esperado, com 100% de perda dos pacotes transmitidos.
+
 <br>
 <center>
 <div style="border: 1px solid black; border-radius: 10px; box-shadow: -5px -5px 15px rgba(0, 0, 0, 0.5); display: inline-block;">
 <img src="./imgs/client(17)_4G-10-1-0-19.PNG" alt="Ping to 133.1" style="border-radius: 10px; vertical-align: middle;">
 </div>
 <div >
-<font size="2"><p style="text-align: center"><b>Figura 22 - Teste de conexão com o 192.168.133.200</b></p></font>
+<font size="2"><p style="text-align: center"><b>Figura 28 - Teste de conexão com o 192.168.133.200</b></p></font>
 </div>
 </center>
 <br>
 
-A conexão não foi realizada como era esperado, com 100% de perda dos pacotes transmitidos.
+
 
 <a name="top7"></a>
 
