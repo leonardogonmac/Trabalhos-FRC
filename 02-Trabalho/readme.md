@@ -697,6 +697,8 @@ Obtivemos a seguinte resposta (figura 22) mostrando a conexão bem sucedida.
 
 #### 6.1.3. Teste de conectividade entre equipamentos da rede privada e equipamentos na rede externa
 
+??????????
+
 
 ### 6.2. Validar NAT
 
@@ -704,14 +706,14 @@ Para verificar se a tradução de endereço (NAT) foi configurada corretamente, 
 
 #### 6.2.1. Testar Tradução de Endereços
 
-Com os seguintes comandos:
+Primeiramente instalamos a ferramenta e depois usamos o comando para monitorar o tráfego da nossa rede LAN pela interface `enp5s0`:
 
 ```bash
 sudo apt-get install tcpdump
 sudo tcpdump -i enp5s0
 ```
 
-Obtemos (figura 23)
+Na figura 23 é possível observar a captura de pacotes na interface LAN.
 
 <br>
 <center>
@@ -722,6 +724,23 @@ Obtemos (figura 23)
 <font size="2"><p style="text-align: center"><b>Figura 23 - Configuração da rede</b></p></font>
 </div>
 </center>
+<br>
+
+Analisando uma dessas linhas como exemplo: 
+
+```bash
+14:50:59.594589 IP 10.1.0.50.51675 > 149.154.174.200.https: Flags [P.], seq 1143111320, win 512, length 0
+```
+
+Foi possível observar:
+- `14:50:59.594589`: Timestamp do momento em que o pacote foi capturado.
+- `IP`:Indica que o protocolo de camada de rede é IP.
+- `10.1.0.50.51675`: Endereço IP de origem (**10.1.0.50**) e porta de origem (**51675**).
+- `>`: Direção do tráfego, indicando que o pacote está indo do IP de origem para o IP de destino.
+- `149.154.174.200.https: Flags [P.]`: Endereço IP de destino (**149.154.174.200** - que corresponde ao site do Telegram) e serviço de destino (https, porta 443), além de outras informações.
+
+Dessa forma, conclui-se que a tradução de endereço (NAT) foi configurada corretamente.
+
 <br>
 
 ### 6.3. Isolamento de Segmento
