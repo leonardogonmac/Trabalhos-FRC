@@ -470,19 +470,6 @@ subnet 10.1.0.0 netmask 255.255.0.0 {
     range 10.1.0.10 10.1.0.100;
 }
 ```
-======
-TESTAR
-======
-```plaintext
-subnet 10.1.0.0 netmask 255.255.0.0 {
-    range 10.1.0.10 10.1.0.100;
-    option routers 10.1.0.1;
-    option domain-name-servers 192.168.133.1;
-}
-```
-======
-FIM DO TESTE
-======
 
 <br>
 <center>
