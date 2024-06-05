@@ -74,7 +74,7 @@ O sistema operacional utilizado foi o Debian, versão 12.5.0.
 
 ## 4. Principais ferramentas utilizadas
 
-A seguir, listamos as principais ferrramentas e os aquivos de configuração que foram alterados.
+A seguir, listamos as principais ferrramentas utilizadas e os aquivos de configuração que foram alterados.
 
 * Configuração de rede: 
   * `ip addr`, `nano`, `cat`
@@ -85,6 +85,8 @@ A seguir, listamos as principais ferrramentas e os aquivos de configuração que
 * Configuração de DHCP: 
   * `/etc/default/isc-dhcp-server`
   * `/etc/dhcp/dhcpd.conf` 
+* Testes de validação:
+  * `ping`, `arp`, `netstat`,`tracert`, `tcpdump`
 
 [(Sumário - voltar ao topo)](#top0)
 
@@ -560,6 +562,7 @@ INTERFACESv4="enp5s0"
 Após todas as configurações feitas, reinicializamos o servidor para que as alterações tivessem efeito.
 
 ```bash
+sudo /etc/init.d/isc-dhcp-server stop
 sudo /etc/init.d/isc-dhcp-server start
 ```
 
@@ -837,6 +840,8 @@ A figura 28 mostra o resultado. A conexão não foi realizada como era esperado,
 
 ## 7. Limitações Conhecidas
 
+- firewall 
+- 
 
 [(Sumário - voltar ao topo)](#top0)
 
