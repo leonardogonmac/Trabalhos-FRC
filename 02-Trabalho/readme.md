@@ -34,8 +34,6 @@ o quais são as limitações conhecidas  -->
     - [5.4. Serviço DHCP](#54-serviço-dhcp)
       - [5.4.1. Instalação do Servidor DHCP](#541-instalação-do-servidor-dhcp)
       - [5.4.2. Configuração do Servidor DHCP](#542-configuração-do-servidor-dhcp)
-- [TESTAR](#testar)
-- [FIM DO TESTE](#fim-do-teste)
       - [5.4.3. Configuração de uma Lease Estática](#543-configuração-de-uma-lease-estática)
       - [5.4.4. Reinicialização do Serviço DHCP](#544-reinicialização-do-serviço-dhcp)
       - [5.4.5. Definição da Interface para o Servidor DHCP](#545-definição-da-interface-para-o-servidor-dhcp)
@@ -44,9 +42,9 @@ o quais são as limitações conhecidas  -->
     - [6.1 Validar Conectividade WAN e LAN](#61-validar-conectividade-wan-e-lan)
       - [6.1.1. Teste de conectividade entre equipamentos da rede privada e o gateway com NAT](#611-teste-de-conectividade-entre-equipamentos-da-rede-privada-e-o-gateway-com-nat)
       - [6.1.2. Teste de conectividade entre equipamentos da rede privada e equipamentos situados na rede de saída do gateway](#612-teste-de-conectividade-entre-equipamentos-da-rede-privada-e-equipamentos-situados-na-rede-de-saída-do-gateway)
-- [FALTOU ESSE TESTE](#faltou-esse-teste)
+- [ok](#ok)
       - [6.1.3. Teste de conectividade entre equipamentos da rede privada e equipamentos na rede externa](#613-teste-de-conectividade-entre-equipamentos-da-rede-privada-e-equipamentos-na-rede-externa)
-- [FALTOU ESSE TESTE](#faltou-esse-teste-1)
+- [testamos e não deu conexão](#testamos-e-não-deu-conexão)
     - [6.2. Validar NAT](#62-validar-nat)
       - [6.2.1. Testar Tradução de Endereços](#621-testar-tradução-de-endereços)
     - [6.3. Isolamento de Segmento](#63-isolamento-de-segmento)
@@ -552,7 +550,7 @@ INTERFACESv4="eno1"
 <br>
 <center>
 <div style="border: 1px solid black; border-radius: 10px; box-shadow: -5px -5px 15px rgba(0, 0, 0, 0.5); display: inline-block;">
-  <img src="./imgs/server(11)_isc-dhcp-server(2)_nano.png" alt="ISC DHCP Server Nano" style="border-radius: 10px; vertical-align: middle;">
+  <img src="./imgs/server(11)_isc-dhcp-server(2)_nano2.png" alt="ISC DHCP Server Nano" style="border-radius: 10px; vertical-align: middle;">
 </div>
 <div >
 <font size="2"><p style="text-align: center"><b>Figura 17 - Arquivo /etc/default/isc-dhcp-server editado</b></p></font>
@@ -681,14 +679,15 @@ Obtivemos a seguinte resposta (figura 20) compovando a conexão entre um equipam
 #### 6.1.2. Teste de conectividade entre equipamentos da rede privada e equipamentos situados na rede de saída do gateway
 
 ====
-FALTOU ESSE TESTE
+ok
 ====
 Também tentamos enviar pacotes ICMP para algum outro computador que estava conectado à outra rede para conferir as configurações de roteamento
 
 ```bash
-ping 192.168.133.1    ALTERAR IP PARA UM COMPUTADOR FORA DA REDE
+ping 192.168.133.200
 ```
-
+<!-- maquina do leo
+-->
 Obtemos a seguinte resposta:
 
 PRINT DA RESPOSTA
@@ -699,24 +698,20 @@ BREVE ANALISE DA RESPOSTA
 #### 6.1.3. Teste de conectividade entre equipamentos da rede privada e equipamentos na rede externa
 
 ====
-FALTOU ESSE TESTE
+testamos e não deu conexão
 ====
 
 E por fim, tentamos enviar pacotes ICMP para algum outro computador que estava conectado à mesma rede para testar a conectividade básica
 
 ```bash
-ping 192.168.133.1    ALTERAR IP PARA UM COMPUTADOR FORA DA REDE
+ping 172.29.40.188
 ```
 Obtemos a seguinte resposta:
 
 PRINT DA RESPOSTA
 BREVE ANALISE DA RESPOSTA
 
-- Em uma máquina cliente da rede LAN, obtenha um endereço IP e teste a conectividade:
-```bash
-dhclient eno1
-ping 10.1.0.1
-```
+
 
 - Obtemos a seguinte resposta:
 <br>
@@ -736,7 +731,18 @@ Verificar se os dispositivos da LAN podem acessar a internet.
 Utilizar ferramentas como tcpdump ou wireshark para monitorar o tráfego NAT.
 
 #### 6.2.1. Testar Tradução de Endereços
-- ?
+
+?
+sudo apt-get install tcpdump
+ip a
+sudo tcpdump -i eno1 -w wan_traffic.pcap
+sudo tcpdump -i enp5s0 -w lan_traffic.pcap
+sudo tcpdump -i eno1 'port 80' -w wan_http_traffic.pcap
+sudo tcpdump -i enp5s0 'port 80' -w lan_http_traffic.pcap
+?
+
+
+
 - Verifique se a máquina cliente da LAN consegue acessar a internet:
 ```bash
 ping 8.8.8.8
@@ -745,7 +751,7 @@ ping 8.8.8.8
 <br>
 <center>
 <div style="border: 1px solid black; border-radius: 10px; box-shadow: -5px -5px 15px rgba(0, 0, 0, 0.5); display: inline-block;">
-  <img src="./imgs/client(6)_tracert-8-8-8-8.PNG" alt="Traceroute to 8.8.8.8" style="border-radius: 10px; vertical-align: middle;">
+  <img src="./imgs/server(14)_tcpdump.png" alt="Traceroute to 8.8.8.8" style="border-radius: 10px; vertical-align: middle; " >
 </div>
 <div >
 <font size="2"><p style="text-align: center"><b>Figura 1 - Configuração da rede</b></p></font>
