@@ -42,7 +42,6 @@ o quais são as limitações conhecidas  -->
     - [6.1 Validar Conectividade WAN e LAN](#61-validar-conectividade-wan-e-lan)
       - [6.1.1. Teste de conectividade entre equipamentos da rede privada e o gateway com NAT](#611-teste-de-conectividade-entre-equipamentos-da-rede-privada-e-o-gateway-com-nat)
       - [6.1.2. Teste de conectividade entre equipamentos da rede privada e equipamentos situados na rede de saída do gateway](#612-teste-de-conectividade-entre-equipamentos-da-rede-privada-e-equipamentos-situados-na-rede-de-saída-do-gateway)
-- [ok](#ok)
       - [6.1.3. Teste de conectividade entre equipamentos da rede privada e equipamentos na rede externa](#613-teste-de-conectividade-entre-equipamentos-da-rede-privada-e-equipamentos-na-rede-externa)
 - [testamos e não deu conexão](#testamos-e-não-deu-conexão)
     - [6.2. Validar NAT](#62-validar-nat)
@@ -311,7 +310,7 @@ Na figura 9, podemos observar a resposta desse comandoi:
 <br>
 <center>
 <div style="border: 1px solid black; border-radius: 10px; box-shadow: -5px -5px 15px rgba(0, 0, 0, 0.5); display: inline-block;">
-  <img src="./imgs/server(6)enp5s0_ifdown_&_ifup.png" alt="enp5s0 ifdown & ifup" style="border-radius: 10px; vertical-align: middle;">
+  <img src="./imgs/server(6)enp5s0_ifdown_&_ifup2.png" alt="enp5s0 ifdown & ifup" style="border-radius: 10px; vertical-align: middle;">
 </div>
 <div >
 <font size="2"><p style="text-align: center"><b>Figura 9 - Interface de rede enp5s0 com IP alterado</b></p></font>
@@ -541,10 +540,10 @@ Editamos o arquivo `/etc/default/isc-dhcp-server`:
 sudo nano /etc/default/isc-dhcp-server
 ```
 
-Modificando a linha a seguir para sempre disparar o serviço DHCP somente na interface `eno1` (figura 17):
+Modificando a linha a seguir para sempre disparar o serviço DHCP somente na interface `enp5s0` (figura 17):
 
 ```plaintext
-INTERFACESv4="eno1"   
+INTERFACESv4="enp5s0"   
 ```
 
 <br>
@@ -598,7 +597,10 @@ Nessa máquina de teste, abrimos um prompt de comando e digitamos o comando:
 ipconfig
 ```
 
-O resultado foi o obtido na figura 19 que mostra que a máquina recebeu um IP preferencial **10.1.0.50** conforme a configuração que realizamos e mostra também que o servidor DHCP e o gateway padrão considerados foi o **10.1.0.1** e o servidor DNS foi **192.168.133.1**.
+O resultado foi o obtido na figura 19 que mostra que a máquina recebeu um IP preferencial **10.1.0.50** conforme a configuração que realizamos. O resultado mostra também:
+- Servidor DHCP: **10.1.0.1**
+- Gateway padrão: **10.1.0.1**
+- Servidor DNS: **192.168.133.1**
 
 <br>
 <center>
@@ -611,7 +613,7 @@ O resultado foi o obtido na figura 19 que mostra que a máquina recebeu um IP pr
 </center>
 <br>
 
-Depois voltamos para a máquina das interfaces configuradas e utilizamos o comando abaixo para exibir a tabela ARP (Address Resolution Protocol) do sistema, que mapeia endereços IP para endereços MAC na rede local:
+Depois voltamos para o servidor e utilizamos o comando abaixo para exibir a tabela ARP (Address Resolution Protocol) do sistema, que mapeia endereços IP para endereços MAC na rede local:
 
 ```bash
 sudo arp -a
@@ -638,22 +640,6 @@ Verificamos que o endereço IP **10.1.0.50** foi resolvido para o MAC Address da
 
 ### 6.1 Validar Conectividade WAN e LAN
 
-<br>
-Conectar um dispositivo à LAN e verificar se ele obtém um IP dentro do range configurado.
-Testar a conectividade com o gateway e com um endereço externo.
-
-1. **Testar Conectividade WAN**:
-   ```bash
-   ping 192.168.133.1
-   ```
-
-2. **Testar Conectividade LAN**:
-   - Em uma máquina cliente da rede LAN, obtenha um endereço IP e teste a conectividade:
-     ```bash
-     dhclient eth0
-     ping 10.0.0.1
-     ```
-
 #### 6.1.1. Teste de conectividade entre equipamentos da rede privada e o gateway com NAT
 
 A partir do equipamento de teste da rede privada verificamos a conectividade WAN enviando pacotes ICMP para o gateway com o seguinte comando:
@@ -662,7 +648,7 @@ A partir do equipamento de teste da rede privada verificamos a conectividade WAN
 ping 192.168.133.1
 ```
 
-Obtivemos a seguinte resposta (figura 20) compovando a conexão entre um equipamento da rede privada e o gateway com NAT.
+Obtivemos a seguinte resposta (figura 20) comprovando a conexão entre um equipamento da rede privada e o gateway com NAT.
 
 <br>
 <center>
@@ -678,9 +664,6 @@ Obtivemos a seguinte resposta (figura 20) compovando a conexão entre um equipam
 
 #### 6.1.2. Teste de conectividade entre equipamentos da rede privada e equipamentos situados na rede de saída do gateway
 
-====
-ok
-====
 Também tentamos enviar pacotes ICMP para algum outro computador que estava conectado à outra rede para conferir as configurações de roteamento
 
 ```bash
@@ -688,10 +671,21 @@ ping 192.168.133.200
 ```
 <!-- maquina do leo
 -->
-Obtemos a seguinte resposta:
 
-PRINT DA RESPOSTA
-BREVE ANALISE DA RESPOSTA
+Obtivemos a seguinte resposta (figura 21) mostrando a conexão bem sucedida.
+
+<br>
+<center>
+<div style="border: 1px solid black; border-radius: 10px; box-shadow: -5px -5px 15px rgba(0, 0, 0, 0.5); display: inline-block;">
+<img src="./imgs/client(3)_ping-133-1.PNG" alt="Ping to 133.1" style="border-radius: 10px; vertical-align: middle;">
+</div>
+<div >
+<font size="2"><p style="text-align: center"><b>Figura 20 - Teste de conexão com o gateway</b></p></font>
+</div>
+</center>
+<br>
+
+
 
 <br>
 
@@ -734,11 +728,7 @@ Utilizar ferramentas como tcpdump ou wireshark para monitorar o tráfego NAT.
 
 ?
 sudo apt-get install tcpdump
-ip a
-sudo tcpdump -i eno1 -w wan_traffic.pcap
-sudo tcpdump -i enp5s0 -w lan_traffic.pcap
-sudo tcpdump -i eno1 'port 80' -w wan_http_traffic.pcap
-sudo tcpdump -i enp5s0 'port 80' -w lan_http_traffic.pcap
+sudo tcpdump -i enp5s0
 ?
 
 
