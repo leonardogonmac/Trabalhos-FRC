@@ -42,12 +42,10 @@ o quais são as limitações conhecidas  -->
     - [6.1 Validar Conectividade WAN e LAN](#61-validar-conectividade-wan-e-lan)
       - [6.1.1. Teste de conectividade entre equipamentos da rede privada e o gateway com NAT](#611-teste-de-conectividade-entre-equipamentos-da-rede-privada-e-o-gateway-com-nat)
       - [6.1.2. Teste de conectividade entre equipamentos da rede privada e equipamentos situados na rede de saída do gateway](#612-teste-de-conectividade-entre-equipamentos-da-rede-privada-e-equipamentos-situados-na-rede-de-saída-do-gateway)
-      - [6.1.3. Teste de conectividade entre equipamentos da rede privada e equipamentos na rede externa](#613-teste-de-conectividade-entre-equipamentos-da-rede-privada-e-equipamentos-na-rede-externa)
-- [testamos e não deu conexão](#testamos-e-não-deu-conexão)
     - [6.2. Validar NAT](#62-validar-nat)
       - [6.2.1. Testar Tradução de Endereços](#621-testar-tradução-de-endereços)
     - [6.3. Isolamento de Segmento](#63-isolamento-de-segmento)
-      - [6.3.1. Verificar o Isolamento](#631-verificar-o-isolamento)
+      - [6.1.3. Teste de conectividade entre equipamentos da rede privada e equipamentos na rede externa](#613-teste-de-conectividade-entre-equipamentos-da-rede-privada-e-equipamentos-na-rede-externa)
   - [7. Limitações Conhecidas](#7-limitações-conhecidas)
 
 
@@ -648,7 +646,7 @@ A partir do equipamento de teste da rede privada verificamos a conectividade WAN
 ping 192.168.133.1
 ```
 
-Obtivemos a seguinte resposta (figura 20) comprovando a conexão entre um equipamento da rede privada e o gateway com NAT.
+Obtivemos a seguinte resposta (figura 20) comprovando a conexão entre um equipamento da rede privada e o gateway da rede WAN.
 
 <br>
 <center>
@@ -656,15 +654,28 @@ Obtivemos a seguinte resposta (figura 20) comprovando a conexão entre um equipa
 <img src="./imgs/client(3)_ping-133-1.PNG" alt="Ping to 133.1" style="border-radius: 10px; vertical-align: middle;">
 </div>
 <div >
-<font size="2"><p style="text-align: center"><b>Figura 20 - Teste de conexão com o gateway</b></p></font>
+<font size="2"><p style="text-align: center"><b>Figura 20 - Teste de conexão com o gateway da rede WAN</b></p></font>
 </div>
 </center>
 <br>
 
+Testamos também a conexão com o gateway da rede LAN
+como mostra a figura 21.
+
+<br>
+<center>
+<div style="border: 1px solid black; border-radius: 10px; box-shadow: -5px -5px 15px rgba(0, 0, 0, 0.5); display: inline-block;">
+  <img src="./imgs/client(2)_ping-10-1-0-1.PNG" alt="Ping to 10.1.0.1" style="border-radius: 10px; vertical-align: middle;">
+</div>
+<div >
+<font size="2"><p style="text-align: center"><b>Figura 21 - Teste de conexão com o gateway da rede LAN</b></p></font>
+</div>
+</center>
+<br>
 
 #### 6.1.2. Teste de conectividade entre equipamentos da rede privada e equipamentos situados na rede de saída do gateway
 
-Também tentamos enviar pacotes ICMP para algum outro computador que estava conectado à outra rede para conferir as configurações de roteamento
+Também tentamos enviar pacotes ICMP a partir da máquina de teste para algum outro computador que estava conectado à rede WAN para conferir as configurações de roteamento.
 
 ```bash
 ping 192.168.133.200
@@ -672,52 +683,26 @@ ping 192.168.133.200
 <!-- maquina do leo
 -->
 
-Obtivemos a seguinte resposta (figura 21) mostrando a conexão bem sucedida.
+Obtivemos a seguinte resposta (figura 22) mostrando a conexão bem sucedida.
 
 <br>
 <center>
 <div style="border: 1px solid black; border-radius: 10px; box-shadow: -5px -5px 15px rgba(0, 0, 0, 0.5); display: inline-block;">
-<img src="./imgs/client(3)_ping-133-1.PNG" alt="Ping to 133.1" style="border-radius: 10px; vertical-align: middle;">
+<img src="./imgs/client(14)_ping-133-200.PNG" alt="Ping to 133.1" style="border-radius: 10px; vertical-align: middle;">
 </div>
 <div >
-<font size="2"><p style="text-align: center"><b>Figura 20 - Teste de conexão com o gateway</b></p></font>
+<font size="2"><p style="text-align: center"><b>Figura 22 - Teste de conexão com o 192.168.133.200</b></p></font>
 </div>
 </center>
 <br>
 
 
 
-<br>
-
-#### 6.1.3. Teste de conectividade entre equipamentos da rede privada e equipamentos na rede externa
-
-====
-testamos e não deu conexão
-====
-
-E por fim, tentamos enviar pacotes ICMP para algum outro computador que estava conectado à mesma rede para testar a conectividade básica
-
-```bash
-ping 172.29.40.188
-```
-Obtemos a seguinte resposta:
-
-PRINT DA RESPOSTA
-BREVE ANALISE DA RESPOSTA
 
 
 
 - Obtemos a seguinte resposta:
-<br>
-<center>
-<div style="border: 1px solid black; border-radius: 10px; box-shadow: -5px -5px 15px rgba(0, 0, 0, 0.5); display: inline-block;">
-  <img src="./imgs/client(2)_ping-10-1-0-1.PNG" alt="Ping to 10.1.0.1" style="border-radius: 10px; vertical-align: middle;">
-</div>
-<div >
-<font size="2"><p style="text-align: center"><b>Figura 1 - Configuração da rede</b></p></font>
-</div>
-</center>
-<br>
+
 
 ### 6.2. Validar NAT
 Tradução de endereço (NAT)
@@ -750,22 +735,37 @@ ping 8.8.8.8
 <br>
 
 ### 6.3. Isolamento de Segmento
-Garantir que dispositivos da LAN não podem se comunicar diretamente com a rede WAN, a menos que o tráfego seja permitido pelas regras do iptables.
 
-#### 6.3.1. Verificar o Isolamento
-- ?
-- As máquinas na LAN não devem conseguir acessar diretamente outras máquinas na rede WAN (exceto através do roteador):
+As máquinas na LAN não devem conseguir acessar diretamente outras máquinas na rede WAN exceto através do roteador. Utilizamos o comando abaixo para testar o roteamento de saída da rede LAN:
+
 ```bash
-ping 192.168.133.2 # Deve responder
-ping 192.168.133.3 # Não deve responder (a menos que configurado de outra forma)
+tracert fga.unb.br
 ```
+
+Obtivemos a seguinte resposta (figura xx) mostrando que o acesso é feito através do gateway da LAN e depois do gateway da rede de acesso, em seguida alcançando o destino.
+
 <br>
 <center>
 <div style="border: 1px solid black; border-radius: 10px; box-shadow: -5px -5px 15px rgba(0, 0, 0, 0.5); display: inline-block;">
-  <img src="./imgs/client(13)_ping-133-3&4.PNG" alt="Ping to 133.3 & 4" style="border-radius: 10px; vertical-align: middle;">
+<img src="./imgs/client(8)_tracert-fga.PNG" alt="Ping to 133.1" style="border-radius: 10px; vertical-align: middle;">
 </div>
 <div >
-<font size="2"><p style="text-align: center"><b>Figura 1 - Configuração da rede</b></p></font>
+<font size="2"><p style="text-align: center"><b>Figura 22 - Teste de conexão com o 192.168.133.200</b></p></font>
+</div>
+</center>
+<br>
+
+#### 6.1.3. Teste de conectividade entre equipamentos da rede privada e equipamentos na rede externa
+
+Da mesma forma  
+
+<br>
+<center>
+<div style="border: 1px solid black; border-radius: 10px; box-shadow: -5px -5px 15px rgba(0, 0, 0, 0.5); display: inline-block;">
+<img src="./imgs/client(15)_ping-192-168-43-39.PNG" alt="Ping to 133.1" style="border-radius: 10px; vertical-align: middle;">
+</div>
+<div >
+<font size="2"><p style="text-align: center"><b>Figura 22 - Teste de conexão com o 192.168.133.200</b></p></font>
 </div>
 </center>
 <br>
