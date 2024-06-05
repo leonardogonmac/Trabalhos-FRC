@@ -40,7 +40,7 @@ o quais são as limitações conhecidas  -->
       - [5.4.6. Verificação das Leases DHCP](#546-verificação-das-leases-dhcp)
   - [6. Testes e Validação](#6-testes-e-validação)
     - [6.1 Validar Conectividade WAN e LAN](#61-validar-conectividade-wan-e-lan)
-      - [6.1.1. Teste de conectividade entre equipamentos da rede privada e o gateway](#611-teste-de-conectividade-entre-equipamentos-da-rede-privada-e-o-gateway)
+      - [6.1.1. Conectividade com o gateway](#611-conectividade-com-o-gateway)
       - [6.1.2. Teste de conectividade entre equipamentos da rede privada e equipamentos situados na rede de saída do gateway](#612-teste-de-conectividade-entre-equipamentos-da-rede-privada-e-equipamentos-situados-na-rede-de-saída-do-gateway)
       - [6.1.3. Teste de conectividade entre equipamentos da rede privada e equipamentos na rede externa](#613-teste-de-conectividade-entre-equipamentos-da-rede-privada-e-equipamentos-na-rede-externa)
     - [6.2. Validar NAT](#62-validar-nat)
@@ -303,7 +303,7 @@ Para verificar se o endereço foi configurado corretamente, usamos o comando:
 sudo ip addr show
 ```
 
-Na figura 9, podemos observar a resposta desse comandoi:
+Na figura 9, podemos observar a resposta desse comando:
 
 <br>
 <center>
@@ -311,12 +311,12 @@ Na figura 9, podemos observar a resposta desse comandoi:
   <img src="./imgs/server(6)enp5s0_ifdown_&_ifup2.png" alt="enp5s0 ifdown & ifup" style="border-radius: 10px; vertical-align: middle;">
 </div>
 <div >
-<font size="2"><p style="text-align: center"><b>Figura 9 - Interface de rede enp5s0 com IP alterado</b></p></font>
+<font size="2"><p style="text-align: center"><b>Figura 9 - Interface de rede enp5s0 com IP alterado e conectada</b></p></font>
 </div>
 </center>
 <br>
 
-Observamos que a interface `enp5s0` agora está configurada com um IP da subrede LAN **10.1.0.1** conforme definimos.
+Observamos que a interface `enp5s0` agora está conectada e configurada com um IP da subrede LAN **10.1.0.1** conforme definimos.
 
 [(Sumário - voltar ao topo)](#top0)
 
@@ -330,7 +330,7 @@ Para realizar o mapeamento entre o IP da rede de acesso e os IPs da rede privada
 
 #### 5.3.1. Habilitação do Roteamento IP
 
-Editarmos o arquivo `/etc/sysctl.conf`:
+Editamos o arquivo `/etc/sysctl.conf`:
 
 ```bash
 sudo nano /etc/sysctl.conf
@@ -383,6 +383,8 @@ sudo iptables -t nat -A POSTROUTING -o eno1 -j MASQUERADE
 sudo iptables -A FORWARD -i enp5s0 -o eno1 -j ACCEPT
 sudo iptables -A FORWARD -i eno1 -o enp5s0 -m state --state RELATED,ESTABLISHED -j ACCEPT
 ```
+
+Esses comandos configuram o NAT e as regras de firewall necessárias para permitir que os dispositivos na LAN `enp5s0` acessem a internet através da interface WAN (`eno1`). A limpeza das regras de firewall garante que não existam regras conflitantes, enquanto as regras de NAT e encaminhamento permitem o tráfego entre as duas interfaces, proporcionando a funcionalidade de roteamento e compartilhamento de conexão com a internet.
 
 <br>
 
@@ -640,7 +642,7 @@ Verificamos que o endereço IP **10.1.0.50** foi resolvido para o MAC Address da
 
 <br>
 
-#### 6.1.1. Teste de conectividade entre equipamentos da rede privada e o gateway
+#### 6.1.1. Conectividade com o gateway
 
 A partir do equipamento de teste da rede privada verificamos a conectividade WAN enviando pacotes ICMP para o gateway com o seguinte comando:
 
@@ -697,7 +699,26 @@ Obtivemos a seguinte resposta (figura 22) mostrando a conexão bem sucedida.
 
 #### 6.1.3. Teste de conectividade entre equipamentos da rede privada e equipamentos na rede externa
 
-??????????
+
+Observamos que ao tentarmos mandar pacotes ICMP para fora da rede, o _firewall_ da rede da UnB não permite a conexão. Para isso, utilizamos os seguintes comandos na máquina de teste:
+
+```bash
+ping 192.168.43.39
+tracert 192.168.43.39
+```
+
+O resultado (figura 23) mostra que os pacotes trafegam até certo ponto e depois são bloqueados.
+
+<br>
+<center>
+<div style="border: 1px solid black; border-radius: 10px; box-shadow: -5px -5px 15px rgba(0, 0, 0, 0.5); display: inline-block;">
+<img src="./imgs/client(15)_ping-192-168-43-39.PNG" alt="Ping to 133.1" style="border-radius: 10px; vertical-align: middle;">
+</div>
+<div >
+<font size="2"><p style="text-align: center"><b>Figura 23 - Teste de conexão com o 192.168.43.39</b></p></font>
+</div>
+</center>
+<br>
 
 
 ### 6.2. Validar NAT
@@ -745,13 +766,15 @@ Dessa forma, conclui-se que a tradução de endereço (NAT) foi configurada corr
 
 ### 6.3. Isolamento de Segmento
 
-As máquinas na LAN não devem conseguir acessar diretamente outras máquinas na rede WAN exceto através do roteador. Utilizamos o comando abaixo para testar o roteamento de saída da rede LAN:
+As máquinas na LAN não devem conseguir acessar diretamente outras máquinas na rede WAN exceto através do roteador. E os equipamentos externos não devem conseguir acessar os IPs da rede privada. 
+
+Para verificar o encaminhamento a partir da máquina de teste para um endereço fora da rede, utilizamos o comando abaixo para testar o roteamento de saída da rede LAN:
 
 ```bash
 tracert fga.unb.br
 ```
 
-Obtivemos a seguinte resposta (figura xx) mostrando que o acesso é feito através do gateway da LAN, depois através do gateway da rede de acesso e em seguida alcançando o destino.
+Obtivemos a seguinte resposta (figura 24) mostrando que o acesso é feito através do gateway da LAN, depois através do gateway da rede de acesso e em seguida alcançando o destino.
 
 <br>
 <center>
@@ -764,25 +787,24 @@ Obtivemos a seguinte resposta (figura xx) mostrando que o acesso é feito atrav�
 </center>
 <br>
 
-Observamos também que ao tentarmos mandar pacotes ICMP para fora da rede, o _firewall_ da rede da UnB não permite a conexão. Para isso, utilizamos os seguintes comandos na máquina de teste:
+Para testar se um equipamento externo não conseguia acessar um IP da rede privada, conectamos uma máquina na rede LAN que recebeu o IP **10.1.0.19**  e tentamos conexão a partir de um outro computador utilizando o 4G e o comando abaixo:
 
 ```bash
-ping 192.168.43.39
-tracert 192.168.43.39
+ping 10.1.0.19
 ```
-
-O resultado 
 
 <br>
 <center>
 <div style="border: 1px solid black; border-radius: 10px; box-shadow: -5px -5px 15px rgba(0, 0, 0, 0.5); display: inline-block;">
-<img src="./imgs/client(15)_ping-192-168-43-39.PNG" alt="Ping to 133.1" style="border-radius: 10px; vertical-align: middle;">
+<img src="./imgs/client(17)_4G-10-1-0-19.PNG" alt="Ping to 133.1" style="border-radius: 10px; vertical-align: middle;">
 </div>
 <div >
-<font size="2"><p style="text-align: center"><b>Figura 23 - Teste de conexão com o 192.168.133.200</b></p></font>
+<font size="2"><p style="text-align: center"><b>Figura 22 - Teste de conexão com o 192.168.133.200</b></p></font>
 </div>
 </center>
 <br>
+
+A conexão não foi realizada como era esperado, com 100% de perda dos pacotes transmitidos.
 
 <a name="top7"></a>
 
