@@ -40,12 +40,12 @@ o quais são as limitações conhecidas  -->
       - [5.4.6. Verificação das Leases DHCP](#546-verificação-das-leases-dhcp)
   - [6. Testes e Validação](#6-testes-e-validação)
     - [6.1 Validar Conectividade WAN e LAN](#61-validar-conectividade-wan-e-lan)
-      - [6.1.1. Teste de conectividade entre equipamentos da rede privada e o gateway com NAT](#611-teste-de-conectividade-entre-equipamentos-da-rede-privada-e-o-gateway-com-nat)
+      - [6.1.1. Teste de conectividade entre equipamentos da rede privada e o gateway](#611-teste-de-conectividade-entre-equipamentos-da-rede-privada-e-o-gateway)
       - [6.1.2. Teste de conectividade entre equipamentos da rede privada e equipamentos situados na rede de saída do gateway](#612-teste-de-conectividade-entre-equipamentos-da-rede-privada-e-equipamentos-situados-na-rede-de-saída-do-gateway)
+      - [6.1.3. Teste de conectividade entre equipamentos da rede privada e equipamentos na rede externa](#613-teste-de-conectividade-entre-equipamentos-da-rede-privada-e-equipamentos-na-rede-externa)
     - [6.2. Validar NAT](#62-validar-nat)
       - [6.2.1. Testar Tradução de Endereços](#621-testar-tradução-de-endereços)
     - [6.3. Isolamento de Segmento](#63-isolamento-de-segmento)
-      - [6.1.3. Teste de conectividade entre equipamentos da rede privada e equipamentos na rede externa](#613-teste-de-conectividade-entre-equipamentos-da-rede-privada-e-equipamentos-na-rede-externa)
   - [7. Limitações Conhecidas](#7-limitações-conhecidas)
 
 
@@ -638,7 +638,9 @@ Verificamos que o endereço IP **10.1.0.50** foi resolvido para o MAC Address da
 
 ### 6.1 Validar Conectividade WAN e LAN
 
-#### 6.1.1. Teste de conectividade entre equipamentos da rede privada e o gateway com NAT
+<br>
+
+#### 6.1.1. Teste de conectividade entre equipamentos da rede privada e o gateway
 
 A partir do equipamento de teste da rede privada verificamos a conectividade WAN enviando pacotes ICMP para o gateway com o seguinte comando:
 
@@ -659,8 +661,7 @@ Obtivemos a seguinte resposta (figura 20) comprovando a conexão entre um equipa
 </center>
 <br>
 
-Testamos também a conexão com o gateway da rede LAN
-como mostra a figura 21.
+Testamos também a conexão LAN com o gateway da rede privada como mostra a figura 21.
 
 <br>
 <center>
@@ -680,8 +681,6 @@ Também tentamos enviar pacotes ICMP a partir da máquina de teste para algum ou
 ```bash
 ping 192.168.133.200
 ```
-<!-- maquina do leo
--->
 
 Obtivemos a seguinte resposta (figura 22) mostrando a conexão bem sucedida.
 
@@ -696,32 +695,23 @@ Obtivemos a seguinte resposta (figura 22) mostrando a conexão bem sucedida.
 </center>
 <br>
 
-
-
-
-
-
-- Obtemos a seguinte resposta:
+#### 6.1.3. Teste de conectividade entre equipamentos da rede privada e equipamentos na rede externa
 
 
 ### 6.2. Validar NAT
-Tradução de endereço (NAT)
-Verificar se os dispositivos da LAN podem acessar a internet.
-Utilizar ferramentas como tcpdump ou wireshark para monitorar o tráfego NAT.
+
+Para verificar se a tradução de endereço (NAT) foi configurada corretamente, verificamos se os dispositivos da LAN conseguiam acessar a internet. Utilizando navegadores comuns, observamos que a navegação ocorria normalmente. Também utilizamos a ferramenta tcpdump para monitorar o tráfego NAT.
 
 #### 6.2.1. Testar Tradução de Endereços
 
-?
+Com os seguintes comandos:
+
+```bash
 sudo apt-get install tcpdump
 sudo tcpdump -i enp5s0
-?
-
-
-
-- Verifique se a máquina cliente da LAN consegue acessar a internet:
-```bash
-ping 8.8.8.8
 ```
+
+Obtemos (figura 23)
 
 <br>
 <center>
@@ -729,7 +719,7 @@ ping 8.8.8.8
   <img src="./imgs/server(14)_tcpdump.png" alt="Traceroute to 8.8.8.8" style="border-radius: 10px; vertical-align: middle; " >
 </div>
 <div >
-<font size="2"><p style="text-align: center"><b>Figura 1 - Configuração da rede</b></p></font>
+<font size="2"><p style="text-align: center"><b>Figura 23 - Configuração da rede</b></p></font>
 </div>
 </center>
 <br>
@@ -742,7 +732,7 @@ As máquinas na LAN não devem conseguir acessar diretamente outras máquinas na
 tracert fga.unb.br
 ```
 
-Obtivemos a seguinte resposta (figura xx) mostrando que o acesso é feito através do gateway da LAN e depois do gateway da rede de acesso, em seguida alcançando o destino.
+Obtivemos a seguinte resposta (figura xx) mostrando que o acesso é feito através do gateway da LAN, depois através do gateway da rede de acesso e em seguida alcançando o destino.
 
 <br>
 <center>
@@ -755,9 +745,14 @@ Obtivemos a seguinte resposta (figura xx) mostrando que o acesso é feito atrav�
 </center>
 <br>
 
-#### 6.1.3. Teste de conectividade entre equipamentos da rede privada e equipamentos na rede externa
+Observamos também que ao tentarmos mandar pacotes ICMP para fora da rede, o _firewall_ da rede da UnB não permite a conexão. Para isso, utilizamos os seguintes comandos na máquina de teste:
 
-Da mesma forma  
+```bash
+ping 192.168.43.39
+tracert 192.168.43.39
+```
+
+O resultado 
 
 <br>
 <center>
@@ -765,7 +760,7 @@ Da mesma forma
 <img src="./imgs/client(15)_ping-192-168-43-39.PNG" alt="Ping to 133.1" style="border-radius: 10px; vertical-align: middle;">
 </div>
 <div >
-<font size="2"><p style="text-align: center"><b>Figura 22 - Teste de conexão com o 192.168.133.200</b></p></font>
+<font size="2"><p style="text-align: center"><b>Figura 23 - Teste de conexão com o 192.168.133.200</b></p></font>
 </div>
 </center>
 <br>
