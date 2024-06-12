@@ -46,7 +46,7 @@ o quais são as limitações conhecidas  -->
     - [6.2. Validar NAT](#62-validar-nat)
       - [6.2.1. Testar Tradução de Endereços](#621-testar-tradução-de-endereços)
     - [6.3. Isolamento de Segmento](#63-isolamento-de-segmento)
-  - [7. Limitações Conhecidas](#7-limitações-conhecidas)
+  - [7. Limitações e Dificuldades](#7-limitações-e-dificuldades)
 
 
 <a name="top1"></a>
@@ -838,10 +838,11 @@ A figura 28 mostra o resultado. A conexão não foi realizada como era esperado,
 
 <a name="top7"></a>
 
-## 7. Limitações Conhecidas
+## 7. Limitações e Dificuldades
 
-- firewall 
-- 
+Todas as etapas de configuração propostas no experimento foram realizadas a contento, apesar de enfrentarmos alguns problemas de hardware do laboratório LDS. A placa de rede do computador que utilizamos apresentou problemas, ora funcionava, ora não funcionava, levando-nos a tirar conclusões erradas a princípio sobre as configurações realizadas. Em um momento que a placa funcionou corretamente, conseguimos realizar todos os testes e coletar informações corretas para a elaboração desse documento.
+
+Enfrentamos também dificuldades para testar a comunicação entre equipamentos conectados a nossa rede LAN e equipamentos conectados a uma rede fora da universidade, devido a restrições do _firewall_ da UnB.
 
 [(Sumário - voltar ao topo)](#top0)
 
