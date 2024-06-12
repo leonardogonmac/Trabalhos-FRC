@@ -102,7 +102,7 @@ Para implementar a configuração da rede em estudo (figura 1), considerou-se co
 <br>
 <center>
 <div style="border: 1px solid black; border-radius: 10px; box-shadow: -5px -5px 15px rgba(0, 0, 0, 0.5); display: inline-block;">
-  <img src="./imgs/configuracao.png" width="100%" alt="Configuração" style="border-radius: 10px; vertical-align: middle;">
+  <img src="./imgs/01_configuracao.png" width="100%" alt="Configuração" style="border-radius: 10px; vertical-align: middle;">
 </div>
 <div >
 <font size="2"><p style="text-align: center"><b>Figura 1 - Configuração da rede</b></p></font>
@@ -126,7 +126,7 @@ verificamos que o serviço foi desativado, como mostra a figura 2.
 <br>
 <center>
 <div style="border: 1px solid black; border-radius: 10px; box-shadow: -5px -5px 15px rgba(0, 0, 0, 0.5); display: inline-block;" >
-  <img src="./imgs/server(2)_NetworkManager.png" alt="Network Manager" style="border-radius: 10px; vertical-align: middle;">
+  <img src="./imgs/02_server(2)_NetworkManager.png" alt="Network Manager" style="border-radius: 10px; vertical-align: middle;">
 </div>
 <div >
 <font size="2"><p style="text-align: center"><b>Figura 2 - Serviço NetworkManager desativado</b></p></font>
@@ -145,7 +145,7 @@ Com a resposta desse comando (figura 3) verificamos que a interface `eno1` estav
 <br>
 <center>
 <div style="border: 1px solid black; border-radius: 10px; box-shadow: -5px -5px 15px rgba(0, 0, 0, 0.5); display: inline-block;">
-  <img src="./imgs/server(1)_ipaddr.png" alt="Server IP Address" style="border-radius: 10px; vertical-align: middle;">
+  <img src="./imgs/03_server(1)_ipaddr.png" alt="NetworkManager desativado" style="border-radius: 10px; vertical-align: middle;">
 </div>
 <div >
 <font size="2"><p style="text-align: center"><b>Figura 3 - Serviço NetworkManager desativado</b></p></font>
@@ -182,7 +182,7 @@ iface eno1 inet static
 <br>
 <center>
 <div style="border: 1px solid black; border-radius: 10px; box-shadow: -5px -5px 15px rgba(0, 0, 0, 0.5); display: inline-block;">
-  <img src="./imgs/server(3)_interfaces_eno1(2)_nano.png" alt="Interfaces eno1 Nano" style="border-radius: 10px; vertical-align: middle;">
+  <img src="./imgs/04_server(3)_interfaces_eno1(2)_nano.png" alt="'/etc/network/interfaces'" style="border-radius: 10px; vertical-align: middle;">
 </div>
 <div >
 <font size="2"><p style="text-align: center"><b>Figura 4 - Edição do arquivo '/etc/network/interfaces'</b></p></font>
@@ -199,7 +199,7 @@ cat /etc/network/interfaces
 <br>
 <center>
 <div style="border: 1px solid black; border-radius: 10px; box-shadow: -5px -5px 15px rgba(0, 0, 0, 0.5); display: inline-block;">
-  <img src="./imgs/server(3)_interfaces_eno1(3)_cat.png" alt="Interfaces eno1 Cat" style="border-radius: 10px; vertical-align: middle;">
+  <img src="./imgs/05_server(3)_interfaces_eno1(3)_cat.png" alt="'/etc/network/interfaces'" style="border-radius: 10px; vertical-align: middle;">
 </div>
 <div >
 <font size="2"><p style="text-align: center"><b>Figura 5 - Arquivo '/etc/network/interfaces' editado</b></p></font>
@@ -228,7 +228,7 @@ sudo ip addr show
 <br>
 <center>
 <div style="border: 1px solid black; border-radius: 10px; box-shadow: -5px -5px 15px rgba(0, 0, 0, 0.5); display: inline-block;">
-  <img src="./imgs/server(4)eno1_ifdown_&_ifup.png" alt="eno1 ifdown & ifup" style="border-radius: 10px; vertical-align: middle;">
+  <img src="./imgs/06_server(4)eno1_ifdown_&_ifup.png" alt="eno1 com IP" style="border-radius: 10px; vertical-align: middle;">
 </div>
 <div >
 <font size="2"><p style="text-align: center"><b>Figura 6 - Interface de rede eno1 com IP alterado</b></p></font>
@@ -268,7 +268,7 @@ iface enp5s0 inet static
 <br>
 <center>
 <div style="border: 1px solid black; border-radius: 10px; box-shadow: -5px -5px 15px rgba(0, 0, 0, 0.5); display: inline-block;">
-  <img src="./imgs/server(5)_interfaces_enp5s0(2)_nano.png" alt="Interfaces enp5s0 Nano" style="border-radius: 10px; vertical-align: middle;">
+  <img src="./imgs/07_server(5)_interfaces_enp5s0(2)_nano.png" alt="'/etc/network/interfaces'" style="border-radius: 10px; vertical-align: middle;">
 </div>
 <div >
 <font size="2"><p style="text-align: center"><b>Figura 7 - Edição do arquivo '/etc/network/interfaces'</b></p></font>
@@ -285,7 +285,7 @@ cat /etc/network/interfaces
 <br>
 <center>
 <div style="border: 1px solid black; border-radius: 10px; box-shadow: -5px -5px 15px rgba(0, 0, 0, 0.5); display: inline-block;">
-  <img src="./imgs/server(5)_interfaces_enp5s0(3)_cat.png" alt="Interfaces enp5s0 Cat" style="border-radius: 10px; vertical-align: middle;">
+  <img src="./imgs/08_server(5)_interfaces_enp5s0(3)_cat.png" alt="'/etc/network/interfaces'" style="border-radius: 10px; vertical-align: middle;">
 </div>
 <div >
 <font size="2"><p style="text-align: center"><b>Figura 8 - Arquivo '/etc/network/interfaces' editado</b></p></font>
@@ -316,7 +316,7 @@ Na figura 9, podemos observar a resposta desse comando:
 <br>
 <center>
 <div style="border: 1px solid black; border-radius: 10px; box-shadow: -5px -5px 15px rgba(0, 0, 0, 0.5); display: inline-block;">
-  <img src="./imgs/server(6)enp5s0_ifdown_&_ifup2.png" alt="enp5s0 ifdown & ifup" style="border-radius: 10px; vertical-align: middle;">
+  <img src="./imgs/09_server(6)enp5s0_ifdown_&_ifup2.png" alt="enp5s0 com IP" style="border-radius: 10px; vertical-align: middle;">
 </div>
 <div >
 <font size="2"><p style="text-align: center"><b>Figura 9 - Interface de rede enp5s0 com IP alterado e conectada</b></p></font>
@@ -353,7 +353,7 @@ net.ipv4.ip_forward=1
 <br>
 <center>
 <div style="border: 1px solid black; border-radius: 10px; box-shadow: -5px -5px 15px rgba(0, 0, 0, 0.5); display: inline-block;">
-  <img src="./imgs/server(7)_sysctl(2)_nano.png" alt="sysctl Nano" style="border-radius: 10px; vertical-align: middle;">
+  <img src="./imgs/10_server(7)_sysctl(2)_nano.png" alt="/etc/sysctl.conf" style="border-radius: 10px; vertical-align: middle;">
 </div>
 <div >
 <font size="2"><p style="text-align: center"><b>Figura 10 - Edição do arquivo /etc/sysctl.conf</b></p></font>
@@ -370,7 +370,7 @@ sudo sysctl -p
 <br>
 <center>
 <div style="border: 1px solid black; border-radius: 10px; box-shadow: -5px -5px 15px rgba(0, 0, 0, 0.5); display: inline-block;">
-  <img src="./imgs/server(7)_sysctl(3)_sudo-p.png" alt="sudo sysctl -p" style="border-radius: 10px; vertical-align: middle;">
+  <img src="./imgs/11_server(7)_sysctl(3)_sudo-p.png" alt="sudo sysctl -p" style="border-radius: 10px; vertical-align: middle;">
 </div>
 <div >
 <font size="2"><p style="text-align: center"><b>Figura 11 - Aplicação do roteamento IP</b></p></font>
@@ -411,7 +411,7 @@ E confirmamos o salvamento como mostra a figura 12.
 <br>
 <center>
 <div style="border: 1px solid black; border-radius: 10px; box-shadow: -5px -5px 15px rgba(0, 0, 0, 0.5); display: inline-block;">
-  <img src="./imgs/server(8)_iptables(3)_persistent-save.png" alt="iptables Persistent Save" style="border-radius: 10px; vertical-align: middle;">
+  <img src="./imgs/12_server(8)_iptables(3)_persistent-save.png" alt="iptables Persistent Save" style="border-radius: 10px; vertical-align: middle;">
 </div>
 <div >
 <font size="2"><p style="text-align: center"><b>Figura 12 - Configuração do iptables-persistent</b></p></font>
@@ -428,7 +428,7 @@ sudo iptables -L -v -n
 <br>
 <center>
 <div style="border: 1px solid black; border-radius: 10px; box-shadow: -5px -5px 15px rgba(0, 0, 0, 0.5); display: inline-block;">
-  <img src="./imgs/server(8)_iptables(2)_Lvn.png" alt="iptables List Verbose" style="border-radius: 10px; vertical-align: middle;">
+  <img src="./imgs/13_server(8)_iptables(2)_Lvn.png" alt="iptables List Verbose" style="border-radius: 10px; vertical-align: middle;">
 </div>
 <div >
 <font size="2"><p style="text-align: center"><b>Figura 13 - Configuração do iptables</b></p></font>
@@ -479,7 +479,7 @@ subnet 10.1.0.0 netmask 255.255.0.0 {
 <br>
 <center>
 <div style="border: 1px solid black; border-radius: 10px; box-shadow: -5px -5px 15px rgba(0, 0, 0, 0.5); display: inline-block;">
-  <img src="./imgs/server(9)_dhcp-conf(2)_nano2.png" alt="DHCP Configuration Nano" style="border-radius: 10px; vertical-align: middle;">
+  <img src="./imgs/14_server(9)_dhcp-conf(2)_nano2.png" alt="DHCP Configuration Nano" style="border-radius: 10px; vertical-align: middle;">
 </div>
 <div >
 <font size="2"><p style="text-align: center"><b>Figura 14 - Arquivo /etc/dhcp/dhcpd.conf editado</b></p></font>
@@ -498,7 +498,7 @@ Nenhuma mensagem de erro foi obtida na resposta, comprovando que não houve erro
 <br>
 <center>
 <div style="border: 1px solid black; border-radius: 10px; box-shadow: -5px -5px 15px rgba(0, 0, 0, 0.5); display: inline-block;">
-  <img src="./imgs/server(10)_dhcp-t.png" alt="DHCP Test" style="border-radius: 10px; vertical-align: middle;">
+  <img src="./imgs/15_server(10)_dhcpd-t.png" alt="DHCP Test" style="border-radius: 10px; vertical-align: middle;">
 </div>
 <div >
 <font size="2"><p style="text-align: center"><b>Figura 15 - Resposta do comando sudo dhcpd -t</b></p></font>
@@ -522,7 +522,7 @@ A figura 16 mostra as alterações feitas.
 <br>
 <center>
 <div style="border: 1px solid black; border-radius: 10px; box-shadow: -5px -5px 15px rgba(0, 0, 0, 0.5); display: inline-block;">
-  <img src="./imgs/server(9)_dhcp-conf(4)_nano-lease.png" alt="DHCP Lease Nano" style="border-radius: 10px; vertical-align: middle;">
+  <img src="./imgs/16_server(9)_dhcp-conf(4)_nano-lease.png" alt="DHCP Lease Nano" style="border-radius: 10px; vertical-align: middle;">
 </div>
 <div >
 <font size="2"><p style="text-align: center"><b>Figura 16 - Arquivo /etc/dhcp/dhcpd.conf editado</b></p></font>
@@ -548,7 +548,7 @@ INTERFACESv4="enp5s0"
 <br>
 <center>
 <div style="border: 1px solid black; border-radius: 10px; box-shadow: -5px -5px 15px rgba(0, 0, 0, 0.5); display: inline-block;">
-  <img src="./imgs/server(11)_isc-dhcp-server(2)_nano2.png" alt="ISC DHCP Server Nano" style="border-radius: 10px; vertical-align: middle;">
+  <img src="./imgs/17_server(11)_isc-dhcp-server(2)_nano2.png" alt="ISC DHCP Server Nano" style="border-radius: 10px; vertical-align: middle;">
 </div>
 <div >
 <font size="2"><p style="text-align: center"><b>Figura 17 - Arquivo /etc/default/isc-dhcp-server editado</b></p></font>
@@ -581,7 +581,7 @@ E a resposta desse comando foi o ilustrado na figura 18, o que mostra a concess�
 <br>
 <center>
 <div style="border: 1px solid black; border-radius: 10px; box-shadow: -5px -5px 15px rgba(0, 0, 0, 0.5); display: inline-block;">
-  <img src="./imgs/server(12)_verifica-lease.png" alt="Verify Lease" style="border-radius: 10px; vertical-align: middle;">
+  <img src="./imgs/18_server(12)_verifica-lease.png" alt="Verify Lease" style="border-radius: 10px; vertical-align: middle;">
 </div>
 <div >
 <font size="2"><p style="text-align: center"><b>Figura 18 - Lease provida pelo servidor DHCP</b></p></font>
@@ -616,7 +616,7 @@ O resultado foi o obtido na figura 19 que mostra que a máquina recebeu um IP pr
 <br>
 <center>
 <div style="border: 1px solid black; border-radius: 10px; box-shadow: -5px -5px 15px rgba(0, 0, 0, 0.5); display: inline-block;">
-  <img src="./imgs/client(1)_Ethernet.PNG" alt="Ethernet" style="border-radius: 10px; vertical-align: middle;">
+  <img src="./imgs/19_client(1)_Ethernet.PNG" alt="Ethernet" style="border-radius: 10px; vertical-align: middle;">
 </div>
 <div >
 <font size="2"><p style="text-align: center"><b>Figura 19 - Configuração do IP da máquina de teste</b></p></font>
@@ -635,7 +635,7 @@ Obtivemos a resposta ilustrada na figura 20 abaixo:
 <br>
 <center>
 <div style="border: 1px solid black; border-radius: 10px; box-shadow: -5px -5px 15px rgba(0, 0, 0, 0.5); display: inline-block;">
-  <img src="./imgs/server(13)_arp-a2.png" alt="ARP Table" style="border-radius: 10px; vertical-align: middle;">
+  <img src="./imgs/20_server(13)_arp-a2.png" alt="ARP Table" style="border-radius: 10px; vertical-align: middle;">
 </div>
 <div >
 <font size="2"><p style="text-align: center"><b>Figura 20 - Resposta do comando sudo arp -a</b></p></font>
@@ -662,10 +662,10 @@ Na figura 21, é possível confirmar que as rotas configuradas estão ativas (`O
 <br>
 <center>
 <div style="border: 1px solid black; border-radius: 10px; box-shadow: -5px -5px 15px rgba(0, 0, 0, 0.5); display: inline-block;">
-  <img src="./imgs/server(15)_netstat.png" alt="ARP Table" style="border-radius: 10px; vertical-align: middle;">
+  <img src="./imgs/21_server(15)_netstat.png" alt="netstat -r" style="border-radius: 10px; vertical-align: middle;">
 </div>
 <div >
-<font size="2"><p style="text-align: center"><b>Figura 21 - Resposta do comando sudo arp -a</b></p></font>
+<font size="2"><p style="text-align: center"><b>Figura 21 - Resposta do comando sudo netstat -r</b></p></font>
 </div>
 </center>
 <br>
@@ -683,7 +683,7 @@ Obtivemos a seguinte resposta (figura 22) comprovando a conexão entre um equipa
 <br>
 <center>
 <div style="border: 1px solid black; border-radius: 10px; box-shadow: -5px -5px 15px rgba(0, 0, 0, 0.5); display: inline-block;">
-<img src="./imgs/client(3)_ping-133-1.PNG" alt="Ping to 133.1" style="border-radius: 10px; vertical-align: middle;">
+<img src="./imgs/22_client(3)_ping-133-1.PNG" alt="Ping to 133.1" style="border-radius: 10px; vertical-align: middle;">
 </div>
 <div >
 <font size="2"><p style="text-align: center"><b>Figura 22 - Teste de conexão com o gateway da rede WAN</b></p></font>
@@ -696,7 +696,7 @@ Testamos também a conexão LAN com o gateway da rede privada como mostra a figu
 <br>
 <center>
 <div style="border: 1px solid black; border-radius: 10px; box-shadow: -5px -5px 15px rgba(0, 0, 0, 0.5); display: inline-block;">
-  <img src="./imgs/client(2)_ping-10-1-0-1.PNG" alt="Ping to 10.1.0.1" style="border-radius: 10px; vertical-align: middle;">
+  <img src="./imgs/23_client(2)_ping-10-1-0-1.PNG" alt="Ping to 10.1.0.1" style="border-radius: 10px; vertical-align: middle;">
 </div>
 <div >
 <font size="2"><p style="text-align: center"><b>Figura 23 - Teste de conexão com o gateway da rede LAN</b></p></font>
@@ -717,7 +717,7 @@ Obtivemos a seguinte resposta (figura 24) mostrando a conexão bem sucedida.
 <br>
 <center>
 <div style="border: 1px solid black; border-radius: 10px; box-shadow: -5px -5px 15px rgba(0, 0, 0, 0.5); display: inline-block;">
-<img src="./imgs/client(14)_ping-133-200.PNG" alt="Ping to 133.1" style="border-radius: 10px; vertical-align: middle;">
+<img src="./imgs/24_client(14)_ping-133-200.PNG" alt="Ping to 133.200" style="border-radius: 10px; vertical-align: middle;">
 </div>
 <div >
 <font size="2"><p style="text-align: center"><b>Figura 24 - Teste de conexão com o 192.168.133.200</b></p></font>
@@ -740,7 +740,7 @@ O resultado (figura 25) mostra que os pacotes trafegam até certo ponto e depois
 <br>
 <center>
 <div style="border: 1px solid black; border-radius: 10px; box-shadow: -5px -5px 15px rgba(0, 0, 0, 0.5); display: inline-block;">
-<img src="./imgs/client(15)_ping-192-168-43-39.PNG" alt="Ping to 133.1" style="border-radius: 10px; vertical-align: middle;">
+<img src="./imgs/25_client(15)_ping-192-168-43-39.PNG" alt="Ping to 192.168.43.39" style="border-radius: 10px; vertical-align: middle;">
 </div>
 <div >
 <font size="2"><p style="text-align: center"><b>Figura 25 - Teste de conexão com o 192.168.43.39</b></p></font>
@@ -767,10 +767,10 @@ Na figura 26 é possível observar a captura de pacotes na interface LAN.
 <br>
 <center>
 <div style="border: 1px solid black; border-radius: 10px; box-shadow: -5px -5px 15px rgba(0, 0, 0, 0.5); display: inline-block;">
-  <img src="./imgs/server(14)_tcpdump.png" alt="Traceroute to 8.8.8.8" style="border-radius: 10px; vertical-align: middle; " >
+  <img src="./imgs/26_server(14)_tcpdump.png" alt="tcpdump-i enp5s0" style="border-radius: 10px; vertical-align: middle; " >
 </div>
 <div >
-<font size="2"><p style="text-align: center"><b>Figura 26 - Configuração da rede</b></p></font>
+<font size="2"><p style="text-align: center"><b>Figura 26 - Tráfego da rede LAN criada</b></p></font>
 </div>
 </center>
 <br>
@@ -778,7 +778,8 @@ Na figura 26 é possível observar a captura de pacotes na interface LAN.
 Analisando uma dessas linhas como exemplo: 
 
 ```bash
-14:50:59.594589 IP 10.1.0.50.51675 > 149.154.174.200.https: Flags [P.], seq 1143111320, win 512, length 0
+14:50:59.594589 IP 10.1.0.50.51675 > 149.154.174.200.https: Flags [P.], 
+seq 1143111320, win 512, length 0
 ```
 
 Foi possível observar:
@@ -807,10 +808,10 @@ Obtivemos a seguinte resposta (figura 27) mostrando que o acesso é feito atrav�
 <br>
 <center>
 <div style="border: 1px solid black; border-radius: 10px; box-shadow: -5px -5px 15px rgba(0, 0, 0, 0.5); display: inline-block;">
-<img src="./imgs/client(8)_tracert-fga.PNG" alt="Ping to 133.1" style="border-radius: 10px; vertical-align: middle;">
+<img src="./imgs/27_client(8)_tracert-fga.PNG" alt="tracert fga.unb.br" style="border-radius: 10px; vertical-align: middle;">
 </div>
 <div >
-<font size="2"><p style="text-align: center"><b>Figura 27 - Teste de conexão com o 192.168.133.200</b></p></font>
+<font size="2"><p style="text-align: center"><b>Figura 27 - Teste de conexão com fga.unb.br</b></p></font>
 </div>
 </center>
 <br>
@@ -826,7 +827,7 @@ A figura 28 mostra o resultado. A conexão não foi realizada como era esperado,
 <br>
 <center>
 <div style="border: 1px solid black; border-radius: 10px; box-shadow: -5px -5px 15px rgba(0, 0, 0, 0.5); display: inline-block;">
-<img src="./imgs/client(17)_4G-10-1-0-19.PNG" alt="Ping to 133.1" style="border-radius: 10px; vertical-align: middle;">
+<img src="./imgs/28_client(17)_4G-10-1-0-19.PNG" alt="Ping to 10.1.0.19" style="border-radius: 10px; vertical-align: middle;">
 </div>
 <div >
 <font size="2"><p style="text-align: center"><b>Figura 28 - Teste de conexão com o 192.168.133.200</b></p></font>
